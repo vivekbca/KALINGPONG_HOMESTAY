@@ -1,0 +1,80 @@
+<app-login-header></app-login-header>
+<div id="content">
+  <div class="row">
+    <h5>
+      <a href="javascript:void(0);" (click)="back()">
+        <i class="fa fa fa-backspace"
+           aria-hidden="true">BACK</i>
+      </a>
+    </h5>&nbsp;&nbsp;&nbsp;
+    <input checked type="radio" id="contactChoice1" style="height:20px; width:20px; vertical-align: middle;text-align:center"
+           name="contact" value="Unchecked" (change)="onRadioChange($event.target.value)">&nbsp;
+    <label for="contactChoice1"><h4>Unchecked</h4></label>&nbsp;
+    &nbsp;&nbsp; <input type="radio" id="contactChoice2" style="height:20px; width:20px; vertical-align: middle;"
+                        name="contact" value="Checked" (change)="onRadioChange($event.target.value)">&nbsp;
+    <label for="contactChoice2"><h4>Checked</h4></label>&nbsp;
+  </div>
+  <br />
+  <div class="row mt-0">
+    <!--<div class="form-group">
+    <button class="btn btn-success" (click)="openPDF()">Download PDF</button>
+  </div>&nbsp;&nbsp;&nbsp;-->
+    <div class="form-group">
+      <button class="btn btn-success" (click)="DownloadBookingReport()">HS Booking Excel Report</button>
+    </div>&nbsp;&nbsp;&nbsp;
+    <div class="form-group">
+      <button class="btn btn-success" (click)="DownloadCancalReport()">HS Cancellation Excel Report</button>
+    </div>&nbsp;&nbsp;&nbsp;
+    <div class="form-group">
+      <button class="btn btn-success" (click)="DownloadPdfBookingReport()">HS Booking Pdf Report</button>
+    </div>&nbsp;&nbsp;&nbsp;
+    <div class="form-group">
+      <button class="btn btn-success" (click)="DownloadPdfCancelReport()">HS Cancellation Pdf Report</button>
+    </div>
+    <!--<div class="form-group">
+    <button (click)="ExportTOExcel()" class="btn btn-success">ExportTOExcel</button>
+  </div>-->
+  </div>
+  <div class="modal-content" style="padding:0px; border:none;">
+    <div class="modal-body">
+      <div>
+        <div id="htmlData" style="text-align:center">
+          <h2>HomeStay Booking List</h2>
+          <div style="text-align:right;margin-bottom:5px" *ngIf="!hideButton">
+            <button (click)="Checked()" class="btn btn-success" >Check</button>
+          </div>
+          <table class="table table-striped table-responsive-md btn-table" style="align-content:center">
+
+            <thead>
+              <tr>
+                <th *ngIf="!hideButton"><input type="checkbox" [(ngModel)]="isMasterSel" name="list_name" value="h1" (change)="checkUncheckAll()" /> &nbsp;&nbsp; <strong>Select All / Unselect All</strong></th>
+                <th>Homestay Name</th>
+                <th>Booked By</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Number Of Person</th>
+                <th>Total Cost</th>
+                <th>Booked On</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of bookingList | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td *ngIf="!hideButton"> <input type="checkbox" [(ngModel)]="data.isSelected" name="list_name" value="{{data.hsBookingId}}" (change)="isAllSelected()" /></td>
+                <td>{{data.hsName}}</td>
+                <td>{{data.guName}}</td>
+                <td>{{data.bkDateFrom | date: 'dd-MM-yyyy'}}</td>
+                <td>{{data.bkDateTo | date: 'dd-MM-yyyy'}}</td>
+                <td>{{data.bkNoPers}}</td>
+                <td>{{data.totalCost}}</td>
+                <td>{{data.bkBookingDate | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+
+

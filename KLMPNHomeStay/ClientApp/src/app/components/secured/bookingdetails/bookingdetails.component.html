@@ -1,0 +1,76 @@
+
+<section class="features">
+  <div class="container">
+    
+    <h2 class="section-header-two text-center">
+      <a href="javascript:void(0);" (click)="back()">
+        <i class="fa fa fa-backspace"
+           aria-hidden="true"></i>
+      </a>&nbsp;
+      Booking Details
+    </h2>
+    <div class="modal-content" style="padding:0px; border:none;">
+      <div class="modal-body">
+        <form action="#" class="needs-validation" method="post" novalidate>
+          <div class="row" *ngFor="let data of BookingDetail">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label"><h5><strong>Homestay Name</strong></h5></label>
+                <div class="col-sm-9">
+                  <label class="form-control" id="Lname" size="40px" disabled><strong>{{data.hsName}}</strong></label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label"><h5><strong>Homestay Address</strong></h5></label>
+                <div class="col-sm-9">
+                  <label class="form-control" id="Lname" size="40px" disabled><strong>{{data.hsAddress1}}</strong></label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label"><h5><strong>Guest Name</strong></h5></label>
+                <div class="col-sm-9">
+                  <label class="form-control" id="Lname" size="40px" disabled><strong>{{data.guName}}</strong></label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label"><h5><strong>Booking Date From</strong></h5></label>
+                <div class="col-sm-9">
+                  <label class="form-control" id="Lname" size="40px" disabled><strong>{{data.bkDateFrom | date: 'dd-MM-yyyy'}}</strong></label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3"><h5><strong>Booking Date To</strong></h5></div>
+                <div class="col-sm-9">
+                  <label class="form-control" id="Lname" size="40px" disabled><strong>{{data.bkDateTo | date: 'dd-MM-yyyy'}}</strong></label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3"><h5><strong>No. Of Person</strong></h5></div>
+                <div class="col-sm-9">
+                  <label class="form-control" id="Lname" size="40px" disabled><strong>{{data.bkNoPers}} Person</strong></label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3"><h5><strong>Payment Amount</strong></h5></div>
+                <div class="col-sm-9">
+                  <label class="form-control" id="Lname" size="40px" disabled><strong>{{data.bkPaymentAmount}}</strong></label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3"><h5><strong>Payment Status</strong></h5></div>
+                <div class="col-sm-9">
+                  <label class="form-control" id="Lname" size="40px" disabled><strong>{{data.bkPaymentStatus}}</strong></label>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+<app-footer></app-footer>

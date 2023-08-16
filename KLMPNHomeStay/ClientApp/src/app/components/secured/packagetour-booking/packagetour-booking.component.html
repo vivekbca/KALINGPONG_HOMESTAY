@@ -1,0 +1,67 @@
+<!--<p>notice-dashboard works!</p>-->
+<!-- header -->
+<div *ngIf="HideSecondHeader==true"><app-header></app-header></div>
+<div *ngIf="HideFirstHeader==true"><app-login-header></app-login-header></div>
+<!-- header End -->
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<main>
+  <div>
+    <section class="features">
+      <div class="container">
+        <h2 class="section-header-two text-center">
+          <a href="javascript:void(0);" (click)="back()">
+            <i class="fa fa fa-backspace"
+               aria-hidden="true"></i>
+          </a>
+          Package Tour List
+
+        </h2>
+        <div class="modal-content" style="padding:0px; border:none;">
+          <div class="modal-body">
+            <table class="table" width="100%">
+              <thead>
+                <tr>
+                  <th width="10%" scope="col" style="text-align:center">Image</th>
+                  <th width="10%" scope="col" style="text-align:center">Name </th>
+                  <th width="10%" scope="col" style="text-align:left">Destination</th>
+                  <th width="10%" scope="col" style="text-align:center">Cost</th>
+                  <!--<th width="25%" scope="col">Contact Person Name</th>
+                  <th width="25%" scope="col">Contact Person Mobile</th>
+                  <th width="25%" scope="col">Contact Person Email</th>-->
+                  <th width="10%" scope="col" style="text-align:center">Book Now</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let el of tourList | paginate: { itemsPerPage: 5, currentPage: p }">
+                  <td width="140px" style="text-align:center"><img src="assets/tour/{{el.img}}" width="130" height="100"></td>
+                  <td width="140px" style="text-align:center">{{el.tourName}}</td>
+                  <td width="140px" style="text-align:center">{{el.destination}} ({{el.destinationDay}} Day , {{el.destinationNight}} Night)</td>
+                  <td width="140px" style="text-align:center">{{el.cost}}</td>
+                  <!--<td width="140px">{{el.contactPersonName}}</td>
+                  <td width="140px">{{el.contactPersonMobile}}</td>
+                  <td width="140px">{{el.contactPersonEmail}}</td>-->
+                  <td width="70px" style="text-align:center" class="actioncol">
+                    <a href="javascript:void(0);" class="viwq" title="Book Now"><i class="fas fa-address-book fa-2x red" aria-hidden="true" (click)="bookNow(el.tourId)"></i></a>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</main>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+             size="medium" color="#fff" type="ball-clip-rotate-pulse" [fullScreen]="true">
+</ngx-spinner>
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- Footer End -->

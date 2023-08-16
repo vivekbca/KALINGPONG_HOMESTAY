@@ -1,0 +1,101 @@
+<!--<p>notice-dashboard works!</p>-->
+<!-- header -->
+<app-header></app-header>
+<!-- header End -->
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<main>
+  <div>
+    <section class="features">
+      <div class="container">
+        <h2 class="section-header-two text-center">
+          Package Tour List Date Add
+        </h2>
+        <div class="modal-content" style="padding:0px; border:none;">
+          <div class="modal-body">
+            <table class="table" width="100%">
+              <thead>
+                <tr>
+                  <th width="10%" scope="col">Name </th>
+                  <th width="20%" scope="col">Destination</th>
+                  <th width="10%" scope="col">Description</th>
+                  <th width="25%" scope="col">Subject</th>
+                  <th width="10%" scope="col">Add Dates</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let el of tourList | paginate: { itemsPerPage: 5, currentPage: p }">
+                  <td width="140px">{{el.name}}</td>
+                  <td width="140px">{{el.destination}} ({{el.destinationDay}} Day , {{el.destinationNight}} Night)</td>
+                  <td width="140px">{{el.description}}</td>
+                  <td width="140px">{{el.subject}}</td>
+                  <td width="70px" class="actioncol">
+                    <a href="javascript:void(0)" class="viwq" title="Book Now"><i class="fas fa-address-book fa-2x red" aria-hidden="true" data-toggle="modal" data-target="#dateAdd"></i></a>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</main>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+             size="medium" color="#fff" type="ball-clip-rotate-pulse" [fullScreen]="true">
+</ngx-spinner>
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- Footer End -->
+
+
+<div class="modal fade loginW100" id="dateAdd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <section class="features">
+        <div class="container">
+          <h5 class="section-header-two text-center">
+            Tour Date Add&nbsp;<i class="fas fa-calendar" style="color:red"></i>
+          </h5>
+          <div class="modal-content" style="padding:0px; border:none;">
+            <div class="modal-body">
+
+              <form [formGroup]="tourDateAddForm" class="needs-validation" novalidate>
+                <div formArrayName="dateAddArray">
+                  <div *ngFor="let gDet of dateAddArray.controls; let i=index">
+                    <div class="frm" [formGroupName]="i">
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td><p><b>From Date:</b></p> <input type="date" formControlName="fromDate" /></td>
+                            <td><p><b>To Date:</b></p> <input type="date" formControlName="toDate" /></td>
+                            <td><p><b>Is Active:</b></p> <input type="checkbox" formControlName="isActive" /></td>
+                            <td><p><b><span class="fa fa-plus" (click)="addDates()"></span></b></p></td>
+                            <td><p><b><span class="fa fa-minus" (click)="removeDates()"></span></b></p></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary next" (click)="saveDate()">Save TourPackage Dates</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

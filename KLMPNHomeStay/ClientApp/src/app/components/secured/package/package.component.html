@@ -1,0 +1,230 @@
+<app-login-header></app-login-header>
+<main>
+  <section class="features">
+    <div class="container">
+      <h2 class="section-header-two text-center">
+        <a href="javascript:void(0);" (click)="back()">
+          <i class="fa fa fa-backspace"
+             aria-hidden="true"></i>
+        </a>&nbsp;
+        ADD PACKAGE TOUR
+      </h2>
+      <form [formGroup]="packageForm" (ngSubmit)="onSubmit()">
+        <div class="modal-content" style="padding:0px; border:none;">
+          <div class="modal-body">  
+            <div class="row">
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Package Name<span style="color:red">*</span></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="PName" formControlName="PName" [ngClass]="{ 'is-invalid': submitted && f.PName.errors }">
+                    <div *ngIf="submitted && f.PName.errors" class="invalid-feedback">
+                      <div *ngIf="f.PName.errors.required">Package Name is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Destination Name<span style="color:red">*</span></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="Lname" formControlName="DName" [ngClass]="{ 'is-invalid': submitted && f.DName.errors }">
+                    <div *ngIf="submitted && f.DName.errors" class="invalid-feedback">
+                      <div *ngIf="f.DName.errors.required">Destination Name is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Day<span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="Country" formControlName="Day" [ngClass]="{ 'is-invalid': submitted && f.Day.errors }">
+                      <option value="">--Select Day--</option>
+                      <option [value]="1">1</option>
+                      <option [value]="2">2</option>
+                      <option [value]="3">3</option>
+                      <option [value]="4">4</option>
+                      <option [value]="5">5</option>
+                      <option [value]="6">6</option>
+                      <option [value]="7">7</option>
+                      <option [value]="8">8</option>
+                      <option [value]="9">9</option>
+                      <option [value]="10">10</option>
+                      <option [value]="11">11</option>
+                      <option [value]="12">12</option>
+                      <option [value]="13">13</option>
+                      <option [value]="14">14</option>
+                      <option [value]="15">15</option>
+                      <option [value]="16">16</option>
+                      <option [value]="17">17</option>
+                      <option [value]="18">18</option>
+                      <option [value]="19">19</option>
+                      <option [value]="20">20</option>
+                    </select>
+                    <div *ngIf="submitted && f.Day.errors" class="invalid-feedback">
+                      <div *ngIf="f.Day.errors.required">Day is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Select Night<span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="Country" formControlName="Night" [ngClass]="{ 'is-invalid': submitted && f.Night.errors }">
+                      <option value="">--Select Night--</option>
+                      <option [value]="1">1</option>
+                      <option [value]="2">2</option>
+                      <option [value]="3">3</option>
+                      <option [value]="4">4</option>
+                      <option [value]="5">5</option>
+                      <option [value]="6">6</option>
+                      <option [value]="7">7</option>
+                      <option [value]="8">8</option>
+                      <option [value]="9">9</option>
+                      <option [value]="10">10</option>
+                      <option [value]="11">11</option>
+                      <option [value]="12">12</option>
+                      <option [value]="13">13</option>
+                      <option [value]="14">14</option>
+                      <option [value]="15">15</option>
+                      <option [value]="16">16</option>
+                      <option [value]="17">17</option>
+                      <option [value]="18">18</option>
+                      <option [value]="19">19</option>
+                      <option [value]="20">20</option>
+                    </select>
+                    <div *ngIf="submitted && f.Night.errors" class="invalid-feedback">
+                      <div *ngIf="f.Night.errors.required">Night is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Subject<span style="color:red">*</span></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="subject" formControlName="Subject" [ngClass]="{ 'is-invalid': submitted && f.Subject.errors }">
+                    <div *ngIf="submitted && f.Subject.errors" class="invalid-feedback">
+                      <div *ngIf="f.Subject.errors.required">Subject is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Description<span style="color:red">*</span></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="email" formControlName="Description" [ngClass]="{ 'is-invalid': submitted && f.Description.errors }">
+                    <div *ngIf="submitted && f.Description.errors" class="invalid-feedback">
+                      <div *ngIf="f.Description.errors.required">Description is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Package Cost<span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="Address" formControlName="Cost" [ngClass]="{ 'is-invalid': submitted && f.Cost.errors }">
+                    <div *ngIf="submitted && f.Cost.errors" class="invalid-feedback">
+                      <div *ngIf="f.Cost.errors.required">Package Price is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Contact Person</div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="City" formControlName="ContactPerson">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Contact Email<span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="inputPassword3" formControlName="ContactEmail" [ngClass]="{ 'is-invalid': submitted && f.ContactEmail.errors }">
+                    <div *ngIf="submitted && f.ContactEmail.errors" class="invalid-feedback">
+                      <div *ngIf="f.ContactEmail.errors.required">Email is required</div>
+                      <div *ngIf="f.ContactEmail.errors.email">Please, Enter a valid Email.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group row">
+                  <div class="col-sm-3">Contact Mobile<span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="inputPassword3" formControlName="ContactMobile" [ngClass]="{ 'is-invalid': submitted && f.ContactMobile.errors }">
+                    <div *ngIf="submitted && f.ContactMobile.errors" class="invalid-feedback">
+                      <div *ngIf="f.ContactMobile.errors.required">Mobile Number is required</div>
+                      <div *ngIf="f.ContactMobile.errors.pattern">Please, Enter 10 digit Mobile Number.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Package Img 1<span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="file" (change)="detectFiles($event,1)" id="hsImage1" accept="image/jpeg" formControlName="Image1" [ngClass]="{ 'is-invalid': submitted && f.Image1.errors }">
+                    <div *ngIf="submitted && f.Image1.errors" class="invalid-feedback">
+                      <div *ngIf="f.Image1.errors.required">Image is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Package Img 2</div>
+                  <div class="col-sm-9">
+                    <input type="file" (change)="detectFiles($event,2)" id="hsImage2" accept="image/jpeg" formControlName="Image2" [ngClass]="{ 'is-invalid': submitted && f.Image2.errors }">
+                    <!--<div *ngIf="submitted && f.Image2.errors" class="invalid-feedback">
+                      <div *ngIf="f.Image2.errors.required">Image is required</div>
+                    </div>-->
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Package Img 3</div>
+                  <div class="col-sm-9">
+                    <input type="file" id="hsImage3" (change)="detectFiles($event,3)" accept="image/jpeg" formControlName="Image3" [ngClass]="{ 'is-invalid': submitted && f.Image3.errors }">
+                    <!--<div *ngIf="submitted && f.Image3.errors" class="invalid-feedback">
+                      <div *ngIf="f.Image3.errors.required">Image is required</div>
+                    </div>-->
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Package Img 4</div>
+                  <div class="col-sm-9">
+                    <input type="file" id="hsImage4" accept="image/jpeg" (change)="detectFiles($event,4)" formControlName="Image4" [ngClass]="{ 'is-invalid': submitted && f.Image4.errors }">
+                    <!--<div *ngIf="submitted && f.Image4.errors" class="invalid-feedback">
+                      <div *ngIf="f.Image4.errors.required">Image is required</div>
+                    </div>-->
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Package Img 5</div>
+                  <div class="col-sm-9">
+                    <input type="file" id="hsImage5" accept="image/jpeg" (change)="detectFiles($event,5)" formControlName="Image5" [ngClass]="{ 'is-invalid': submitted && f.Image5.errors }">
+                    <!--<div *ngIf="submitted && f.Image5.errors" class="invalid-feedback">
+                      <div *ngIf="f.Image5.errors.required">Image is required</div>
+                    </div>-->
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Tour PDF File<span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="file" (change)="detectFiles($event,6)" size="60" class="file" accept=".pdf" formControlName="PackagePdf" [ngClass]="{ 'is-invalid': submitted && f.PackagePdf.errors }" />
+                    <div *ngIf="submitted && f.PackagePdf.errors" class="invalid-feedback">
+                      <div *ngIf="f.PackagePdf.errors.required">File is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Facilities</div>
+                  <div class="col-sm-9">
+                    <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="roomFacilities" id="roomFacility" formControlName="roomFacility">
+                    </ng-multiselect-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer-jo">
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group row">
+                  <div class="col-sm-8"><button type="button" class="btn btn-primary" (click)="onSubmit()">Add Package</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+  </main>
+  <app-footer></app-footer>

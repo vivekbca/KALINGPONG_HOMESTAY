@@ -1,0 +1,141 @@
+<header>
+  <div class="container-fluid"  autoscroll="true">
+
+    <div class="section-top">
+      <div class="row">
+        <div class="col-sm-5 col-md-5 col-lg-5">
+          <div class="left-first-part">
+            <div class="logo-section">
+              <img src="assets/logo.png">
+            </div>
+            <div class="andhra-point">
+              <h2>Kalimpong District Homestay Tourism <br />Co-operative Society Ltd. </h2>
+              <p>A SMART STEP IN HILL TOURISM</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-7 col-md-7 col-lg-7">
+          <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+            <div class="selaction-aria">
+              <div class="st-dropdown">
+                <div class="select-one">
+                  <select class="form-select" aria-label="Default select example" (change)="onBlockChange($event.target.value)" formControlName="blockId" [ngClass]="{ 'is-invalid': submitted && f.blockId.errors }">
+                    <!--<option selected>Select Block</option>-->
+                    <option value="">--Select Block--</option>
+                    <option *ngFor="let block of BlockList" [value]="block.blockId">{{block.blockName}}</option>
+                  </select>
+                  <div *ngIf="submitted && f.blockId.errors" class="invalid-feedback">
+                    <div *ngIf="f.blockId.errors.required">Block is required</div>
+                  </div>
+                </div>
+                <div class="select-one">
+                  <select class="form-select" aria-label="Default select example" (change)="onVillageChange($event.target.value)" formControlName="villageId" [ngClass]="{ 'is-invalid': submitted && f.villageId.errors }">
+                    <option value="">--Select Village--</option>
+                    <option *ngFor="let village of VillageList" [value]="village.villId">{{village.villName}}</option>
+                  </select>
+                  <div *ngIf="submitted && f.villageId.errors" class="invalid-feedback">
+                    <div *ngIf="f.villageId.errors.required">Village is required</div>
+                  </div>
+                </div>
+                <div class="select-one">
+                  <select class="form-select" aria-label="Default select example" formControlName="homestayId">
+                    <option value="">--Select Homestay--</option>
+                    <option *ngFor="let homestay of HomestayList" [value]="homestay.hsId">{{homestay.hsName}}</option>
+                  </select>
+                </div>
+              </div>
+              <!--<li><a (click)="onSubmit()"><i class="fas fa-search"></i></a></li>-->
+              <!--<div class="serach-aria">
+    <div class="input-group">
+                 <div class="form-outline">
+  <input id="search-input" type="search" id="form1" class="form-control" />
+  </div> 
+              <div class="search-box">
+    <div class="search__anchor">
+      <form id="event-search-form" action="get">-->
+        <!--<input type="text" class="search__bar" placeholder="Search Event">-->
+        <!--<li><a (click)="onSubmit()"><i class="fas fa-search"></i></a></li>-->
+        <!--<div><i class="fas fa-search"></i>
+    <input class="search__toggler" type="button" (click)="onSubmit()">
+  </div>-->
+        <!--<div class="search__toggler"></div>-->
+      <!--</form>
+              </div>
+      </div>
+    </div>
+  </div>-->
+              <div class="home-icon-aria">
+                <ul class="navbar">
+                  <li><a (click)="onSubmit()"><i class="fas fa-search"></i></a></li>
+                  <li><a href="#"><i class="fas fa-home"></i></a></li>
+                  <li>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><i class="far fa-user-circle"></i></a>
+                    <div class="dropdown-menu">
+                      <!--<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> My Account</a>-->
+                      <!--<div class="dropdown-divider"></div>-->
+                      <a href="#" class="dropdown-item" routerLink="/guregistration"><i class="fa fa-user-o"></i> Register</a>
+                      <div class="dropdown-divider"></div>
+                      <a routerLink="/login" class="dropdown-item">Log in</a>
+                      <!--<div class="dropdown-divider"></div>
+                      <a href="#" class="dropdown-item">Forgot Password?</a>-->
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </form>
+            <div class="nav-section">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link">ABOUT US  </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#prop">HOME STAYS </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" (click)="packagetour()">PACKAGE TOURS</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" (click)="tenderList()">TENDER </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" (click)="noticeList()">NOTICES </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link">CONTACT US  </a>
+                    </li>
+                   
+                    <!--<li class="nav-item">
+    <a class="nav-link" href="#"> FEEDBACK </a>
+  </li>-->
+                    <!--<li class="nav-item dropdown">
+    <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">OTHER LINK</a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="#">My Account</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#login">Log in</a>
+      <div class="dropdown-divider"></div>
+      <a href="#" class="dropdown-item">Forgot Password?</a>
+    </div>
+  </li>-->
+                  </ul>
+
+                </div>
+              </nav>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>

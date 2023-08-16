@@ -1,0 +1,132 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <UserSecretsId>KLMPNH-homestay-ce345b64-19cf-4972-b34f-d16f2e7976ed-$ree</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.7.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.21" />
+    <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\components\unsecured\NewFolder\**" />
+    <Compile Remove="ClientApp\src\app\components\unsecured\notice\**" />
+    <Compile Remove="ClientApp\src\app\handlers\**" />
+    <Compile Remove="ClientApp\src\app\interceptors\**" />
+    <Compile Remove="ClientApp\src\app\model\unsecured\NewFolder\**" />
+    <Compile Remove="ClientApp\src\NewFolder\**" />
+    <Compile Remove="obj\**" />
+    <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\components\unsecured\NewFolder\**" />
+    <Content Remove="ClientApp\src\app\components\unsecured\notice\**" />
+    <Content Remove="ClientApp\src\app\handlers\**" />
+    <Content Remove="ClientApp\src\app\interceptors\**" />
+    <Content Remove="ClientApp\src\app\model\unsecured\NewFolder\**" />
+    <Content Remove="ClientApp\src\NewFolder\**" />
+    <Content Remove="obj\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\components\unsecured\NewFolder\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\components\unsecured\notice\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\handlers\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\interceptors\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\model\unsecured\NewFolder\**" />
+    <EmbeddedResource Remove="ClientApp\src\NewFolder\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\app\components\unsecured\NewFolder\**" />
+    <None Remove="ClientApp\src\app\components\unsecured\notice\**" />
+    <None Remove="ClientApp\src\app\handlers\**" />
+    <None Remove="ClientApp\src\app\interceptors\**" />
+    <None Remove="ClientApp\src\app\model\unsecured\NewFolder\**" />
+    <None Remove="ClientApp\src\NewFolder\**" />
+    <None Remove="obj\**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\model\unsecured\notice-dto.ts" />
+    <None Remove="ClientApp\src\app\services\common\confirmed.validator.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\components\secured\booking\" />
+    <Folder Include="ClientApp\src\app\components\secured\tender\" />
+    <Folder Include="ClientApp\src\app\components\secured\notice\" />
+    <Folder Include="ClientApp\src\app\directives\common\sorting\" />
+    <Folder Include="ClientApp\src\app\guards\" />
+    <Folder Include="ClientApp\src\app\model\common\" />
+    <Folder Include="ClientApp\src\app\model\secured\" />
+    <Folder Include="ClientApp\src\app\services\secured\" />
+    <Folder Include="ClientApp\src\app\services\unsecured\authentication\" />
+    <Folder Include="ClientApp\src\app\services\unsecured\home\" />
+    <Folder Include="ClientApp\src\app\services\unsecured\hsLogin\" />
+    <Folder Include="ClientApp\src\app\services\unsecured\Popularity\" />
+    <Folder Include="Report\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\model\unsecured\notice-dto.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\common\confirmed.validator.ts" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

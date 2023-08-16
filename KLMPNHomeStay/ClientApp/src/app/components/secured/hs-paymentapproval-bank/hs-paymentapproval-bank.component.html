@@ -1,0 +1,158 @@
+<app-login-header></app-login-header>
+<br />
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<main>
+  <div>
+    <section class="features">
+      <div class="container">
+        <h2 class="section-header-two text-center">
+          <a href="javascript:void(0);" (click)="back()">
+            <i class="fa fa fa-backspace"
+               aria-hidden="true"></i>
+          </a>
+          HomeStay Payment Approval List
+        </h2>
+        <div class="modal-content" style="padding:0px; border:none;">
+          <div class="modal-body">
+            <table class="table" width="100%">
+              <thead>
+                <tr>
+                  <th width="15%" scope="col"><h5><strong>HomeStay</strong></h5></th>
+                  <th width="15%" scope="col"><h5><strong>Address</strong></h5></th>
+                  <th width="15%" scope="col"><h5><strong>Booking Date</strong></h5></th>
+                  <th width="15%" scope="col"><h5><strong>From Date</strong></h5></th>
+                  <th width="15%" scope="col"><h5><strong>To Date</strong></h5></th>
+                  <th width="10%" scope="col"><h5><strong>Amount</strong></h5></th>
+                  <th width="10%" scope="col"><h5><strong>No of Person</strong></h5></th>
+                  <th width="20%" scope="col"><h5><strong>Action</strong></h5></th>
+                  <!--<th width="15%" scope="col">Action</th>-->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let el of hsList | paginate: { itemsPerPage: 10, currentPage: p }">
+                  <td width="140px">{{el.hsName}}</td>
+                  <td width="150px">{{el.address}}</td>
+                  <td width="140px">{{el.bookingDt}}</td>
+                  <td width="140px">{{el.fromDt}}</td>
+                  <td width="140px">{{el.toDt}}</td>
+                  <td width="140px">{{el.paymentAmount}}</td>
+                  <td width="140px">{{el.person}}</td>
+
+                  <td width="130px">
+                    <a style="padding: 13px;" href="javascript:void(0);" class="viwq" title="Approve" data-toggle="modal" data-target="#login">
+                      <i class="fa fa-book" aria-hidden="true" (click)="accept(el.bookingId)"></i>
+                    </a>
+                  </td>
+
+                </tr>
+
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</main>
+
+<app-footer></app-footer>
+
+<!--View Details Modal-->
+<div class="modal fade loginW100" id="login" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <section class="features">
+        <div class="container">
+          <h2 class="section-header-two text-center">
+            Booking Details
+          </h2>
+          <div class="modal-content" style="padding:0px; border:none;">
+            <div class="modal-body">
+              <!--<form>-->
+              <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label"><h5><strong>HomeStay</strong></h5></label>
+                    <div class="col-sm-9">
+                      <label class="form-control" size="40px" disabled><strong>{{hsDetail.hsName}}</strong></label>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label"><h5><strong>Address</strong></h5></label>
+                    <div class="col-sm-9">
+                      <label class="form-control" id="Lname" size="40px" disabled><strong>{{hsDetail.address}}</strong></label>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label"><h5><strong>Village</strong></h5></label>
+                    <div class="col-sm-9">
+                      <label class="form-control" id="Lname" size="40px" disabled><strong>{{hsDetail.village}}</strong></label>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label"><h5><strong>From Date</strong></h5></label>
+                    <div class="col-sm-9">
+                      <label class="form-control" id="Lname" size="40px" disabled><strong>{{hsDetail.fromDt}}</strong></label>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label"><h5><strong>To Date</strong></h5></label>
+                    <div class="col-sm-9">
+                      <label class="form-control" id="Lname" size="40px" disabled><strong>{{hsDetail.toDt}}</strong></label>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label"><h5><strong>Booking Date</strong></h5></label>
+                    <div class="col-sm-9">
+                      <label class="form-control" id="Lname" size="40px" disabled><strong>{{hsDetail.bookingDt}}</strong></label>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label"><h5><strong>Guest Name</strong></h5></label>
+                    <div class="col-sm-9">
+                      <label class="form-control" id="Lname" size="40px" disabled><strong>{{hsDetail.userName}}</strong></label>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label"><h5><strong>No of Person</strong></h5></label>
+                    <div class="col-sm-9">
+                      <label class="form-control" id="Lname" size="40px" disabled><strong>{{hsDetail.person}}</strong></label>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label"><h5><strong>Payment Amount</strong></h5></label>
+                    <div class="col-sm-9">
+                      <label class="form-control" id="Lname" size="40px" disabled><strong>{{hsDetail.paymentAmount}}</strong></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-jo">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      <div class="form-group row">
+                        <div class="col-sm-12"><button type="button" class="btn btn-primary" (click)="approveBookingPay(hsDetail.bookingId)">Fund Transfer</button></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--</form>-->
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<!--Modal End-->

@@ -1,0 +1,428 @@
+<div *ngIf="HideSecondHeader==true"><app-header></app-header></div>
+<div *ngIf="HideFirstHeader==true"><app-login-header></app-login-header></div>
+<!--Search List-->
+<div id="booking" class="booking-section">
+  <div class="container">
+    <div class="row">
+      <div class="booking-form">
+        <div class="form-header">
+          <h1>{{tourDetail.tourName}} Detail</h1>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--Search list End-->
+<!--Homestay Details-->
+
+<section class="features">
+  <div class="container">
+    <div class="row tracker-section">
+      <div id="parentHorizontalTab-two">
+        <div class="resp-tabs-container hor_1">
+          <div [hidden]="tab1">
+            <div class="row">
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <div class="gt-stard-contain">
+                    <div id="custCarousel" class="carousel slide" data-ride="carousel" align="center">
+                      <!-- slides -->
+                      <div class="carousel-inner">
+                        <div class="carousel-item active" *ngIf="tourDetail.img1"> <img src="assets/tour/{{tourDetail.img1}}" alt="Hills"> </div>
+                        <div class="carousel-item" *ngIf="tourDetail.img2"> <img src="assets/tour/{{tourDetail.img2}}" /> </div>
+                        <div class="carousel-item" *ngIf="tourDetail.img3"> <img src="assets/tour/{{tourDetail.img3}}" /> </div>
+                        <div class="carousel-item" *ngIf="tourDetail.img4"> <img src="assets/tour/{{tourDetail.img4}}" /> </div>
+                        <div class="carousel-item" *ngIf="tourDetail.img5"> <img src="assets/tour/{{tourDetail.img5}}" /> </div>
+                      </div>
+                      <!-- Left right --> <a class="carousel-control-prev" href="#custCarousel" data-slide="prev"> <span class="carousel-control-prev-icon"></span> </a> <a class="carousel-control-next" href="#custCarousel" data-slide="next"> <span class="carousel-control-next-icon"></span> </a> <!-- Thumbnails -->
+                      <ol class="carousel-indicators list-inline">
+                        <li class="list-inline-item active" *ngIf="tourDetail.img1"> <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#custCarousel"> <img src="assets/tour/{{tourDetail.img1}}" alt="Hills" class="img-fluid"> </a> </li>
+                        <li class="list-inline-item" *ngIf="tourDetail.img2"> <a id="carousel-selector-1" data-slide-to="1" data-target="#custCarousel">  <img src="assets/tour/{{tourDetail.img2}}" class="img-fluid" /> </a> </li>
+                        <li class="list-inline-item" *ngIf="tourDetail.img3"> <a id="carousel-selector-2" data-slide-to="2" data-target="#custCarousel">  <img src="assets/tour/{{tourDetail.img3}}" class="img-fluid" /> </a> </li>
+                        <li class="list-inline-item" *ngIf="tourDetail.img4"> <a id="carousel-selector-2" data-slide-to="3" data-target="#custCarousel"> <img src="assets/tour/{{tourDetail.img4}}" class="img-fluid" /> </a> </li>
+                        <li class="list-inline-item" *ngIf="tourDetail.img5"> <a id="carousel-selector-2" data-slide-to="4" data-target="#custCarousel"> <img src="assets/tour/{{tourDetail.img5}}" class="img-fluid" /> </a> </li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="ranabitan">
+                  <h2>Destination : {{tourDetail.destination}}</h2>
+                  <p><i class="fas fa-sun" aria-hidden="true"></i>&nbsp;&nbsp;{{tourDetail.destinationDay}}&nbsp;Day</p>
+                  <p><i class="fas fa-cloud-moon" aria-hidden="true"></i>&nbsp;&nbsp;{{tourDetail.destinationNight}}&nbsp;Night</p>
+                </div>
+                <div class="ranabitan-two">
+                  <h2>Cost(Per Head)</h2>
+                  <p>{{tourDetail.cost}}</p>
+                </div>
+                <div class="ranabitan-two">
+                  <h2>Amenities</h2>
+                  <div class="service-point">
+                    <ul *ngFor="let aminities of tourDetail.hsAmImg">
+                      <li *ngIf="aminities" title="{{aminities.aminName}}"><img src="assets/{{aminities.amin}}"></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="ranabitan-two">
+                  <h2>Subject</h2>
+                  <p>{{tourDetail.subject}}</p>
+                </div>
+                <div class="ranabitan-two">
+                  <h2>Description</h2>
+                  <p>{{tourDetail.description}}</p>
+                </div>
+                <div class="ranabitan-two">
+                  <h2>Contact Person Name</h2>
+                  <p>{{tourDetail.contactPersonName}}</p>
+                </div>
+                <div class="ranabitan-two">
+                  <h2>Contact Person Email</h2>
+                  <p>{{tourDetail.contactPersonEmail}}</p>
+                </div>
+                <div class="ranabitan-two">
+                  <h2>Contact Person Mobile</h2>
+                  <p>{{tourDetail.contactPersonMobile}}</p>
+                </div>
+                <a href="javascript:void(0);" style="color:red" (click)="tourFile(tourDetail.tourId)">Tour File Download</a>
+              </div>
+            </div>
+            <form [formGroup]="tourForm" novalidate>
+              <div class="container">
+                <div class="row">
+                  <h2 class="section-header-two text-center">Booking Slots</h2>
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="table-responsive">
+                      <div class="form-group" [hidden]="noDate">
+                        <label for="exampleInputEmail1"><b>Select Slot</b></label>
+                        <select class="form-control" formControlName="dateId">
+                          <option value="">--Select Your Option--</option>
+                          <option *ngFor="let tour of tourDateDetail" value={{tour.dateId}} placeholder="Select your option">
+                            {{tour.fromDt}} - {{tour.toDt}}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-sm-12 col-md-12 col-lg-12 footer-jo " style="text-align:right">
+                        <button type="submit" class="btn btn-primary next" [hidden]="noDate" (click)="OnBooking()">Book Now</button>
+                        <button type="button" class="btn btn-primary previous" (click)="back()">Previuos</button>
+                      </div>
+                    </div>
+                  </div>
+                  <p [hidden]="!noDate" style="color:blue">No Tour Date Available</p>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div [hidden]="!tab2">
+            <div class="modal-body">
+              <div class="table-responsive mx-ht">
+                <h2 class="section-header-two text-center">Assign Member</h2>
+                <br />
+                <table class="table table-fixed mg-btm">
+                  <tr>
+                    <th width="10px">
+                      Destination
+                    </th>
+                    <th width="10px">
+                      Cost(Per Head)
+                    </th>
+                    <th width="10px">
+                      Contact Person Name
+                    </th>
+                    <th width="10px">
+                      Contact Person Mobile
+                    </th>
+                    <th width="10px">
+                      Contact Person Email
+                    </th>
+                  </tr>
+
+                  <tbody>
+                    <tr>
+                      <td width="10px" style="color:blue">{{tourDetail.destination}}</td>
+                      <td width="10px" style="color:blue">{{tourDetail.cost}}</td>
+                      <td width="10px" style="color:blue">{{tourDetail.contactPersonName}}</td>
+                      <td width="10px" style="color:blue">{{tourDetail.contactPersonMobile}}</td>
+                      <td width="10px" style="color:blue">{{tourDetail.contactPersonEmail}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <form [formGroup]="assignMemberDetailForm" novalidate>
+                  <div class="room-partion-men">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-8 col-lg-8">
+                        <div class="my-rooms-name">
+                          <p><b>Select</b></p>
+                        </div>
+                        <div class="my-rooms-select">
+                          <div class="form-group">
+                            <label><b>No of Person</b> </label>
+                            <select class="form-control" formControlName="person" [ngClass]="{ 'is-invalid': submitted && f1.person.errors }">
+                              <!--<select class="form-control">-->
+                              <option value="">Select</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
+                              <option>7</option>
+                              <option>8</option>
+                              <option>9</option>
+                              <option>10</option>
+                            </select>
+                            <div *ngIf="submitted && f1.person.errors" class="invalid-feedback">
+                              <div *ngIf="f1.person.errors.required">Person No is required</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-12 col-lg-12 footer-jo ">
+                        <button type="submit" class="btn btn-primary next" (click)="AssignMember()">Next</button>
+                        <button type="button" class="btn btn-primary previous" (click)="back1()">Previuos</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+          <div [hidden]="!tab3">
+            <div class="modal-body">
+              <div class="table-responsive mx-ht">
+                <h2 style="color:black">Invoice Information</h2>
+                <div class="footer-jo"><button type="button" class="btn btn-primary next" (click)="logout()" align="right">Logout</button></div>
+
+                <div class="row">
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="book-room-one">
+                      <ul>
+                        <li> <strong>Tour name :</strong> <p> {{tourName}} </p></li>
+                        <li><strong>Date of Booking :</strong> <p>{{currentDate | date: 'dd MMM, yyyy'}}</p></li>
+                      </ul>
+                    </div>
+
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="book-room-one">
+                      <ul>
+                        <li> <strong>Tour Cost :</strong> <p>{{totalCost}}</p></li>
+                        <li><strong>Tour Date :</strong> <p>{{fromDate}} - {{toDate}}</p></li>
+                      </ul>
+                    </div>
+                    <div class="room-charges-box">
+                      <ul>
+                        <li><p>No of Person:</p> <span class="prices">{{person}}</span></li>
+                      </ul>
+                    </div>
+
+
+                  </div>
+                </div>
+                <p>
+                  <button type="button" (click)="addGuests()" style="color:rebeccapurple">Add Guest Detail</button>
+                </p>
+                <form [formGroup]="gustDetailForm" class="needs-validation" novalidate>
+                  <div formArrayName="guestDet">
+                    <!--<div *ngFor="let gDet of gurDetailForm.controls.guestDet['controls']; let i=index">-->
+                    <div *ngFor="let gDet of guestDet.controls; let i=index">
+                      <div class="frm" [formGroupName]="i">
+                        <table>
+                          <tbody>
+                            <!--<tr *ngFor='let in of guestDetail ;let i = index'>-->
+                            <tr>
+                              <td><p><b>First Name:</b></p> <input type="text" formControlName="gFirstName" /></td>
+                              <td><p><b>Last Name:</b></p> <input type="text" formControlName="gLastName" /></td>
+                              <td><p><b>DOB:</b></p> <input type="date" formControlName="gDOB" /></td>
+                              <td>
+                                <p><b>Gender:</b></p>
+                                <select formControlName="gGender">
+                                  <option value="">Select</option>
+                                  <option>M</option>
+                                  <option>F</option>
+                                </select>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <br />
+                <form [formGroup]="invoiceDetailForm" class="needs-validation" novalidate>
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"><b>First Name</b></label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" formControlName="firstName" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"><b>Last Name</b></label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" formControlName="lastName" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"><b>Mobile Number</b></label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" formControlName="mobileNo" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"><b>Email Address</b></label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" formControlName="email" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-3"><b>Address</b></div>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" formControlName="address" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-3"><b>City</b></div>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" formControlName="city" disabled>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                          <div class="form-group row">
+                            <div class="col-sm-3"><b>Country</b></div>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" formControlName="country" disabled>
+
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-3"><b>Pin Code</b></div>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" formControlName="pinCode" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-3"><b>Gender</b> <span style="color:red">*</span></div>
+                            <div class="col-sm-9">
+                              <select class="form-control" formControlName="gender" disabled>
+                                <option value="">Select</option>
+                                <option>M</option>
+                                <option>F</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-3"><b>Date of Birth</b></div>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" formControlName="dob" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-3"><b>Identity Proof</b></div>
+                            <div class="col-sm-9">
+                              <select class="form-control" formControlName="identityType" disabled>
+                                <option value="">Select</option>
+                                <option>Aadhar Card</option>
+                                <option>PAN Card</option>
+                                <option>Voter Card</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-3"><b>Identity No</b></div>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" formControlName="identityNo" disabled>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12 col-md-12 col-lg-12 footer-jo ">
+                    <button type="button" class="btn btn-primary next" (click)="proceedPay()">Proceed to Pay</button>
+                    <button type="button" class="btn btn-primary previous">Previuos</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div [hidden]="!tab4">
+            <div class="modal-body">
+              <div class="table-responsive mx-ht">
+                <h2 style="color:black">Payment</h2>
+                <div class="footer-jo"><button type="button" class="btn btn-primary next" (click)="logout()" align="right">Logout</button></div>
+                <h3 style="color:black">You need to pay {{totalCost}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div [hidden]="!loginNone">
+    <form [formGroup]="packgbookingLoginForm" novalidate>
+      <div style="max-width:500px; margin:0 auto">
+        <div class="modal-content" style="border:none">
+          <h2 class="section-header-two text-center" id="staticBackdropLabel">Login</h2>
+          <div class="modal-body">
+            <!--<form action="#" class="needs-validation" method="post">-->
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group row">
+                  <label class="col-sm-12 col-form-label"><b>User Name</b><span style="color:red">*</span></label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f2.userName.errors }">
+                    <div *ngIf="submitted && f2.userName.errors" class="invalid-feedback">
+                      <div *ngIf="f2.userName.errors.required">User Name is required</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-12"><b>Password</b><span style="color:red">*</span></div>
+                  <div class="col-sm-12">
+                    <input type="password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f2.password.errors }">
+                    <div *ngIf="submitted && f2.password.errors" class="invalid-feedback">
+                      <div *ngIf="f2.password.errors.required">Password is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--</form>-->
+          </div>
+          <div class="footer-jo">
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group row">
+                  <div class="col-sm-12"><button type="button" class="btn btn-primary" (click)="onLogin()">Login</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+</section>
+<!--<section class="features">
+
+</section>-->
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+             size="medium" color="#fff" type="ball-clip-rotate-pulse" [fullScreen]="true">
+</ngx-spinner>
+
+<!--Homestay Details End-->
+<app-footer></app-footer>

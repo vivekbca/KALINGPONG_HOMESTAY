@@ -1,0 +1,216 @@
+<app-login-header></app-login-header>
+<br />
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<main>
+  <div>
+    <section class="features">
+      <div class="container">
+        <h2 class="section-header-two text-center">
+          <a href="javascript:void(0);" (click)="back()">
+            <i class="fa fa fa-backspace"
+               aria-hidden="true"></i>
+          </a>
+          Homestay Approval List
+        </h2>
+        <div class="modal-content" style="padding:0px; border:none;">
+          <div class="modal-body">
+            <table class="table" width="100%">
+              <thead>
+                <tr>
+                  <th width="15%" scope="col">Name</th>
+                  <th width="15%" scope="col">Address</th>
+                  <th width="15%" scope="col">Pincode</th>
+                  <th width="15%" scope="col">Village</th>
+                  <th width="15%" scope="col">Block</th>
+                  <th width="15%" scope="col">District</th>
+                  <th width="30%" scope="col">Action</th>
+                  <th width="15%" scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let el of hsList | paginate: { itemsPerPage: 10, currentPage: p }">
+                  <td width="140px">{{el.hsName}}</td>
+                  <td width="150px">{{el.address}}</td>
+                  <td width="140px">{{el.pincode}}</td>
+                  <td width="140px">{{el.villName}}</td>
+                  <td width="140px">{{el.blockName}}</td>
+                  <td width="140px">{{el.districtName}}</td>
+                  <!--<td width="70px" class="actioncol">
+    <a href="javascript:void(0);" class="viwq"><i class="fas fa-file-pdf fa-2x red" aria-hidden="true" (click)="viewFile(el.noticeId)"></i></a>
+  </td>-->
+                  
+                  <td width="30px">
+                    <a style="padding: 13px;" href="javascript:void(0);" class="viwq" title="Approve" data-toggle="modal" data-target="#login">
+                      <i class="fa fa-check" aria-hidden="true" (click)="HSDetailAction(el.hsId,1)"></i>
+                    </a>
+                    <a style="padding: 13px;" href="javascript:void(0);" class="viwq" title="Reject" data-toggle="modal" data-target="#login">
+                      <i class="fa fa-times" aria-hidden="true" (click)="HSDetailAction(el.hsId,2)"></i>
+                    </a>
+
+                  </td>
+                  <td width="30px">
+                    <a style="padding: 13px;" href="javascript:void(0);" class="viwq" title="View">
+                      <i class="fa fa-eye" aria-hidden="true" (click)="view(el.hsId)"></i>
+                    </a>
+                  </td>
+                  <!--<td width="15px"><a href="javascript:void(0);" class="viwq" title="Reject"><i class="fa fa-times" aria-hidden="true" (click)="reject(el.hsId)"></i></a></td>-->
+                </tr>
+
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</main>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+             size="medium" color="#fff" type="ball-clip-rotate-pulse" [fullScreen]="true">
+</ngx-spinner>
+<app-footer></app-footer>
+<div class="modal fade loginW100" id="login" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <section class="features">
+        <div class="container">
+          <h2 class="section-header-two text-center">
+            Homestay Approval Detail
+          </h2>
+          <div class="modal-content" style="padding:0px; border:none;">
+            <section class="features">
+              <div class="container">
+                <div class="modal-content" style="padding:0px; border:none;">
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Homestay Name</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsName}}</strong></label>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Address</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsAddress1}}</strong></label>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Pincode</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.pincode}}</strong></label>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Block</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsBlockName}}</strong></label>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Village</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsVillName}}</strong></label>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>District</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsDistrictName}}</strong></label>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Contact Person Name</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsContactName}}</strong></label>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Contact Person Email</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsContactEmail}}</strong></label>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Contact Person Mobile</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsContactMob1}}</strong></label>
+                          </div>
+                        </div> <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>No of Rooms</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsNoOfRooms}}</strong></label>
+                          </div>
+                        </div> <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Bank Name</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsBankName}}</strong></label>
+                          </div>
+                        </div> <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Branch</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsBankBranch}}</strong></label>
+                          </div>
+                        </div> <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Account No</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsAccountNo}}</strong></label>
+                          </div>
+                        </div> <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>Account Type</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsAccountType}}</strong></label>
+                          </div>
+                        </div> <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>IFSC</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsIfsc}}</strong></label>
+                          </div>
+                        </div> <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><h5><strong>MICR</strong></h5></label>
+                          <div class="col-sm-9">
+                            <label class="form-control" size="40px" disabled><strong>{{hsDetails.hsMicr}}</strong></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="footer-jo">
+                      <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                          <div class="form-group row" [hidden]="!acceptTure">
+                            <div class="col-sm-12"><button type="button" class="btn btn-primary" (click)="accept(hsDetails.hsId)">Approve</button></div>
+                          </div>
+                          <div class="form-group row" [hidden]="acceptTure">
+                            <div class="col-sm-12"><button type="button" class="btn btn-primary" (click)="reject(hsDetails.hsId)">Reject</button></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+      <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+                   size="medium" color="#fff" type="ball-clip-rotate-pulse" [fullScreen]="true">
+      </ngx-spinner>
+    </div>
+  </div>
+</div>
+

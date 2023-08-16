@@ -1,0 +1,54 @@
+<!--<p>notice-list works!</p>-->
+<!-- header -->
+<app-header></app-header>
+<!-- header End -->
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<main>
+  <section class="features">
+    <div class="container">
+      <h2 class="section-header-two text-center">View Notice</h2>
+      <div class="modal-content" style="padding:0px; border:none;">
+        <div class="modal-body">
+          <table class="table" width="100%">
+            <thead>
+              <tr>
+                <!--<th width="10%" scope="col">Serial No</th>-->
+                <th width="30%" scope="col">Heading </th>
+                <th width="30%" scope="col">Subject/ Topic </th>
+                <!--<th width="15%" scope="col">Memo No</th>-->
+                <th width="15%" scope="col">Publish Date</th>
+                <!--<th width="15%" scope="col">Closing Date</th>-->
+                <th width="15%" scope="col">Download</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let el of noticeList | paginate: { itemsPerPage: 5, currentPage: p }">
+
+                <!--<td width="150px">{{(pageNo * pageSize)+i+1}}</td>-->
+                <!--<td width="140px">{{ index + 1 }}</td>-->
+                <td>{{el.heading}}</td>
+                <td>{{el.subject}}</td>
+                <td>{{el.publishingDate| date: 'dd-MM-yyyy'}}</td>
+                <td>
+                  <a href="javascript:void(0);" class="viwq"><i class="fas fa-file-pdf fa-2x red" aria-hidden="true" (click)="viewFile(el.noticeId)"></i></a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+             size="medium" color="#fff" type="ball-clip-rotate-pulse" [fullScreen]="true">
+</ngx-spinner>
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- Footer End -->

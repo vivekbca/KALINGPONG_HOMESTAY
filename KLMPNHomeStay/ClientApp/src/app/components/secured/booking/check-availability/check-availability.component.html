@@ -1,0 +1,576 @@
+<!--Amit DA-->
+<!-- header -->
+<app-header></app-header>
+<!-- header End -->
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<main>
+  <section class="features">
+    <div class="container" [hidden]="loginNone">
+      <h2 class="section-header-two text-center">Booking Steps</h2>
+      <div class="tracker-section">
+        <div id="parentHorizontalTab-two">
+          <ul class="resp-tabs-list availability hor_1">
+            <li class="resp-tab-active">Check Availability<span class="steps">1</span></li>
+            <li [hidden]="tab2">Assign Member<span class="steps">2</span></li>
+            <li [hidden]="!tab2" class="resp-tab-active">Assign Member<span class="steps">2</span></li>
+            <li [hidden]="tab3">Invoice Information<span class="steps">3</span></li>
+            <li [hidden]="!tab3" class="resp-tab-active">Invoice Information<span class="steps">3</span></li>
+            <li [hidden]="tab4">Payment<span class="steps">4</span></li>
+            <li [hidden]="!tab4" class="resp-tab-active">Payment<span class="steps">4</span></li>
+            <!--<li>Payment<span class="steps">4</span></li>-->
+          </ul>
+          <div class="resp-tabs-container hor_1">
+            <div [hidden]="tab2">
+              <div [hidden]="bookRoom" class="modal-body">
+                <div class="table-responsive mx-ht">
+                  <h2 style="color:black">Check Availability</h2>
+                  <div class="notification-box">
+                    <p>Room Availability Check</p>
+                  </div><br /><br /><br />
+                  <div [hidden]="!logoutButton" class="footer-jo"><button type="button" class="btn btn-primary next" (click)="logout()" align="right">Logout</button></div>
+
+                  <div [hidden]="bookRoom">
+                    <form [formGroup]="checkavailForm" novalidate>
+                      <div class="row">
+                        <div class="col-md-3 col-lg-12">
+                          <div class="col-lg-6 col-md-3 col-sm-12">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label"><b>From Date</b><span style="color:red">*</span></label>
+                              <div class="col-sm-9">
+                                <input type="date" date="dd-MM-yyyy" class="form-control" formControlName="fromDate" [ngClass]="{ 'is-invalid': submitted && f.fromDate.errors }">
+                                <div *ngIf="submitted && f.fromDate.errors" class="invalid-feedback">
+                                  <div *ngIf="f.fromDate.errors.required">From Date is required</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label"><b>To Date</b><span style="color:red">*</span></label>
+                              <div class="col-sm-9">
+                                <input type="date" class="form-control" formControlName="toDate" [ngClass]="{ 'is-invalid': submitted && f.toDate.errors }">
+                                <div *ngIf="submitted && f.toDate.errors" class="invalid-feedback">
+                                  <div *ngIf="f.toDate.errors.required">To Date is required</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label"><b>No Of Rooms</b><span style="color:red">*</span></label>
+                              <div class="col-sm-9">
+                                <!--<input type="date" class="form-control" formControlName="toDate">-->
+                                <select class="form-control" formControlName="noOfRooms" [ngClass]="{ 'is-invalid': submitted && f.noOfRooms.errors }">
+                                  <option value="">Select</option>
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                  <option>5</option>
+                                </select>
+                                <div *ngIf="submitted && f.noOfRooms.errors" class="invalid-feedback">
+                                  <div *ngIf="f.noOfRooms.errors.required">No Of Rooms is required</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!--<div class="col-sm-8">
+        <button type="button" class="btn btn-primary" (click)="OnCheck()">
+          Check Availability
+        </button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-warning" (click)="back()">Back</button>
+      </div>-->
+                      <div class="col-sm-12 col-md-12 col-lg-12 footer-jo ">
+                        <button type="button" class="btn btn-primary next" (click)="OnCheck()">Check Availability</button>
+                        <button type="button" class="btn btn-primary previous" (click)="back()">Previuos</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="modal-body" [hidden]="!checkRoom">
+                <div *ngFor="let el of availRoomList">
+                  <h4>Date: {{el.date | date: 'dd.MM.yyyy'}}</h4>
+
+                  <table class="table" width="100%">
+                    <thead>
+                      <tr>
+                        <th width="20%" scope="col"> Room No</th>
+                        <th width="20%" scope="col">Rate(Per Head)</th>
+                        <th width="20%" scope="col">Category</th>
+                        <th width="20%" scope="col">Availablity</th>
+                        <th width="20%" scope="col">Select</th>
+                      </tr>
+                    </thead>
+                    <!--<div *ngFor="let el1 of el.roomAvailabilityModels ; let i=index;">-->
+
+                    <tbody>
+                      <tr *ngFor="let el1 of el.roomAvailabilityModels ; let i=index;">
+                        <td scope="col">{{el1.hsRoomNo}} </td>
+                        <td scope="col">{{el1.hsRoomRate}} </td>
+                        <td scope="col">{{el1.hsRoomCategoryName}} </td>
+                        <!--<td *ngIf="el1.isAvailable === 1? " ggg" : "fff" " width="10%" scope="col">ddddd</td>-->
+                        <!--<td width="20%" style="color:green">{{ el1.isAvailable === 1 ? 'Available' : 'Not Available' }}</td>-->
+                        <td *ngIf="el1.isAvailable === 1">
+                          <strong style="color:green">Available</strong>
+                        </td>
+                        <td *ngIf="el1.isAvailable === 0">
+                          <strong style="color:red">Not Available</strong>
+                        </td>
+                        <td *ngIf="el1.isAvailable === 1">
+                          <input type="checkbox" [(ngModel)]="el1.isChecked" [checked]="checkboxDetails" />
+
+                          <!--<input type="checkbox" (change)="checkRoomItem(el1.isChecked, el1.hsRoomNo, i)" [(ngModel)]="el1.isChecked" [checked]="checkboxDetails" />-->
+                          <!--<input type="checkbox" [checked]="el1.isChecked == 'true'" value="{{el1.isChecked}}" />-->
+                        </td>
+                      </tr>
+                    </tbody>
+                    <!--</div>-->
+                  </table>
+
+                </div>
+                <div align="right" class="col-sm-12 col-md-12 col-lg-12 footer-jo ">
+                  <button type="button" class="btn btn-primary next" (click)="bookedRoomNext()">
+                    Next
+                  </button>
+                  <!--<button type="button" class="btn btn-primary previous" (click)="back()">Previuos</button>-->
+                </div>
+              </div>
+            </div>
+            <div [hidden]="!bookRoom">
+              <div class="modal-body">
+                <div class="table-responsive mx-ht">
+                  <h2 style="color:black">Assign Member</h2>
+                  <div [hidden]="!logoutButton" class="footer-jo"><button type="button" class="btn btn-primary next" (click)="logout()" align="right">Logout</button></div>
+
+                  <h3 class="text58">Summary Of Room Selection From <span>{{fromDt | date: 'dd MMM, yyyy'}}</span> To <span>{{toDt | date: 'dd MMM, yyyy'}}</span></h3>
+                  <div class="notification-box">
+                    <p>*Room Selection.</p>
+                    <p>Room Selection</p>
+                  </div>
+                  <br />
+                  <table class="table table-fixed mg-btm">
+                    <thead>
+                      <tr>
+
+                        <th width="40px">HomeStay Name</th>
+                        <th width="10px" style="color:blue">{{hsName}}</th>
+                      </tr>
+                    </thead>
+
+                  </table>
+                  <div class="room-blog">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th width="140px">From</th>
+                          <th width="140px">To</th>
+                          <th width="150px">Room No</th>
+                          <th width="150px">Category</th>
+                          <th width="140px">Tariff(per head)</th>
+                          <!--<th width="100px">&nbsp;</th>-->
+                        </tr>
+                      </thead>
+                      <tbody style="max-height:450px">
+                        <tr *ngFor="let el2 of roomModels">
+                          <td width="140px" style="color:blue">{{el2.fromDt | date: 'dd MMM, yyyy'}}</td>
+                          <td width="140px" style="color:blue">{{el2.toDt | date: 'dd MMM, yyyy'}}</td>
+                          <td width="150px" style="color:blue">{{el2.roomNo}}</td>
+                          <td width="150px" style="color:blue">{{el2.categoryName}}</td>
+                          <td width="140px" style="color:blue">{{el2.rate}}</td>
+                        </tr>
+                      </tbody>
+
+                    </table>
+                  </div>
+                  <form [formGroup]="bookingDetailForm" novalidate>
+                    <div class="room-partion-men">
+                      <div class="row">
+                        <div class="col-sm-12 col-md-8 col-lg-8">
+                          <div class="my-rooms-name">
+                            <p><b>Select</b></p>
+                          </div>
+                          <div class="my-rooms-select">
+                            <div class="form-group">
+                              <label><b>Adult</b> </label>
+                              <select class="form-control" formControlName="adult" (change)="adultNo($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f1.adult.errors }">
+                                <!--<select class="form-control" formControlName="adult">-->
+                                <option value="">Select</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                              </select>
+                              <div *ngIf="submitted && f1.adult.errors" class="invalid-feedback">
+                                <div *ngIf="f1.adult.errors.required">Adult No is required</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="my-rooms-select">
+                            <div class="form-group">
+                              <label><b>Child</b> </label>
+                              <select class="form-control" formControlName="child" (change)="childNo($event.target.value)">
+                                <!--<select class="form-control" formControlName="child">-->
+                                <option value="">Select</option>
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                              </select>
+
+                            </div>
+                          </div>
+                          <div class="my-rooms-select">
+                            <div class="form-group">
+                              <label><b>Discount</b></label>
+                              <select class="form-control" formControlName="discountType" (change)="discountChange($event.target.value)">
+                                <!--<select class="form-control" formControlName="discountType">-->
+                                <option value="">Select</option>
+                                <option>None</option>
+                                <option>20% - Senior Citizen</option>
+                                <option>50% - Cancer Patient</option>
+                                <option>25% - Single Occupancy</option>
+                              </select>
+
+                            </div>
+                          </div>
+                          <button type="button" class="btn btn-primary next" (click)="calculatePricing()" align="right">Calculate Pricing</button>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                          <div class="price-total-section">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td class="number54">₹ {{totalRate}}</td>
+                              </tr>
+                              <tr>
+                                <td style="background: #afafaf; height: 1px"></td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                    <tr>
+                                      <td class="number21">Room Charges</td>
+                                      <td class="number22">₹ {{totalRate}}</td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="background: #afafaf; height: 1px"></td>
+                              </tr>
+                              <tr>
+                                <td class="number20">Tatal {{totalRooms}} Rooms {{totalNight}} nights</td>
+                              </tr>
+
+                              <!--<tr>
+                                <td class="number19">1 AC COTTAGE, DBL BED</td>
+                              </tr>-->
+                              <tr>
+                                <td>&nbsp;</td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 footer-jo ">
+                          <button type="button" class="btn btn-primary next" [disabled]="!calculatePrice" (click)="bookingDetailNext()">Next</button>
+                          <button type="button" class="btn btn-primary previous" (click)="back2()">Previuos</button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+            <div [hidden]="!tab3">
+              <div [hidden]="!invoice" class="modal-body">
+                <div class="table-responsive mx-ht">
+                  <h2 style="color:black">Invoice Information</h2>
+                  <div class="footer-jo"><button type="button" class="btn btn-primary next" (click)="logout()" align="right">Logout</button></div>
+
+                  <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                      <div class="book-room-one">
+                        <ul>
+                          <li> <strong>Lodge name :</strong> <p> {{hsName}} </p></li>
+                          <li><strong>Date of Booking :</strong> <p>{{currentDate | date: 'dd MMM, yyyy'}}</p></li>
+                        </ul>
+                      </div>
+                      <div class="room-charges-box">
+                        <ul>
+                          <li><strong>Room Charges :</strong> <span class="prices">₹{{withOutDiscountTotal}}</span></li>
+                          <li><strong>Discount : </strong> <span class="prices">{{discountRate}}%</span></li>
+                          <li><strong>Discount Amount: </strong> <span class="prices-n">₹{{discountAmount}}</span></li>
+                          <li><strong>Total Fare :</strong> <span class="prices">₹{{totalRate}}</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                      <div class="book-room-one">
+                        <ul>
+                          <li> <strong>Chack in date :</strong> <p>{{fromDt | date: 'dd MMM, yyyy'}}</p></li>
+                          <li><strong>Chack out date :</strong> <p>{{toDt | date: 'dd MMM, yyyy'}}</p></li>
+                        </ul>
+                      </div>
+                      <div class="room-charges-box">
+                        <ul>
+                          <li><p>Room Details:</p> <span class="prices">No of Room : </span></li>
+                          <li><strong>Room : 1</strong></li>
+                          <li><strong>Adult:&nbsp;</strong> <p>{{adultNumber}}&nbsp;&nbsp;</p> <strong> Child:&nbsp;</strong><p>{{childNumber}}&nbsp;&nbsp;</p> <strong>Discount:&nbsp;</strong><p>{{discountDet}}&nbsp;&nbsp;</p></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="room-blog">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr style="background: #f1f1f1;">
+                          <th width="20%">From</th>
+                          <th width="20%">To</th>
+                          <th width="20%">Room No</th>
+                          <th width="20%">Category</th>
+                          <th width="20%">Tariff(per head)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let el3 of roomModels">
+                          <td style="color:blue">{{el3.fromDt | date: 'dd MMM, yyyy'}}</td>
+                          <td style="color:blue">{{el3.toDt | date: 'dd MMM, yyyy'}}</td>
+                          <td style="color:blue">{{el3.roomNo}}</td>
+                          <td style="color:blue">{{el3.categoryName}}</td>
+                          <td style="color:blue">{{el3.rate}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                 <form [formGroup]="invoiceDetailForm" class="needs-validation" novalidate >
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-12">
+                        <!--<form action="#" class="needs-validation" method="post" novalidate>-->
+                          <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                              <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"><b>First Name</b></label>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" formControlName="firstName" disabled>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"><b>Last Name</b></label>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" formControlName="lastName" disabled>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"><b>Mobile Number</b></label>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" formControlName="mobileNo" disabled>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"><b>Email Address</b></label>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" formControlName="email" disabled>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="col-sm-3"><b>Address</b></div>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" formControlName="address" disabled>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="col-sm-3"><b>City</b></div>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" formControlName="city" disabled>
+                                </div>
+                              </div>
+                             
+
+
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                              <div class="form-group row">
+                                <div class="col-sm-3"><b>Country</b></div>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" formControlName="country" disabled>
+                                  <!--<select class="form-control" formControlName="country" disabled>
+        <option value="">-Please Select-</option>
+        <option *ngFor="let country of countryList" value={{country.countryId}}>
+          {{country.countryName}}
+        </option>
+      </select>-->
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="col-sm-3"><b>Pin Code</b></div>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" formControlName="pinCode" disabled>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="col-sm-3"><b>Gender</b> <span style="color:red">*</span></div>
+                                <div class="col-sm-9">
+                                  <select class="form-control" formControlName="gender" disabled>
+                                    <option value="">Select</option>
+                                    <option>M</option>
+                                    <option>F</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="col-sm-3"><b>Date of Birth</b></div>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" formControlName="dob" disabled>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="col-sm-3"><b>Identity Proof</b></div>
+                                <div class="col-sm-9">
+                                  <select class="form-control" formControlName="identityType" disabled>
+                                    <option value="">Select</option>
+                                    <option>Aadhar Card</option>
+                                    <option>PAN Card</option>
+                                    <option>Voter Card</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="col-sm-3"><b>Identity No</b></div>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" formControlName="identityNo" disabled>
+                                </div>
+                              </div>
+                              <!--<div class="form-group row">
+    <div class="col-sm-3"><b>User Name</b> <span style="color:red">*</span></div>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" formControlName="userName">
+    </div>
+  </div>-->
+                              <!--<div class="form-group row">
+    <div class="col-sm-3"><b>Password</b> <span style="color:red">*</span></div>
+    <div class="col-sm-9">
+      <input type="password" class="form-control" formControlName="password">
+    </div>
+  </div>-->
+                              <!--<div class="form-group row">
+    <div class="col-sm-3"><b></b>Retype Password <span style="color:red">*</span></div>
+    <div class="col-sm-9">
+      <input type="password" class="form-control" formControlName="rePassword">
+    </div>
+  </div>-->
+                              <!--<div class="form-group row">
+    <div class="col-sm-3">Captcha</div>
+    <div class="col-sm-5">
+      <div class="capcha-p"><img src="images/capcha.jpg" style=""><br /><a href="#"><i class="fas fa-sync-alt"></i></a></div>
+    </div>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="inputPassword3">
+    </div>
+  </div>-->
+                            </div>
+                          </div>
+                        <!--</form>-->
+                      </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12 footer-jo ">
+                      <button type="button" class="btn btn-primary next" (click)="proceedPay()">Proceed to Pay</button>
+                      <button type="button" class="btn btn-primary previous" (click)="backMember()">Previuos</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div [hidden]="!tab4">
+              <div class="modal-body">
+                <div class="table-responsive mx-ht">
+                  <h2 style="color:black">Payment</h2>
+                  <div class="footer-jo"><button type="button" class="btn btn-primary next" (click)="logout()" align="right">Logout</button></div>
+                  <h3 style="color:black">You need to pay {{totalRate}}</h3>
+                </div>
+              </div>
+            </div>
+            <br />
+
+           
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div [hidden]="!loginNone">
+      <!--<div class="modal fade loginW" id="login" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+      <!--<div class="modal fade loginW" id="login" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+       <form [formGroup]="bookingLoginForm" novalidate>
+      <div style="max-width:500px; margin:0 auto">
+          <div class="modal-content" style="border:none">
+            <h2 class="section-header-two text-center" id="staticBackdropLabel">Login</h2>
+              <div class="modal-body">
+                <!--<form action="#" class="needs-validation" method="post">-->
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group row">
+                      <label class="col-sm-12 col-form-label"><b>User Name</b><span style="color:red">*</span></label>
+                      <div class="col-sm-12">
+                        <input type="text" class="form-control" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f2.userName.errors }">
+                        <div *ngIf="submitted && f2.userName.errors" class="invalid-feedback">
+                          <div *ngIf="f2.userName.errors.required">User Name is required</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-sm-12"><b>Password</b><span style="color:red">*</span></div>
+                      <div class="col-sm-12">
+                        <input type="password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f2.password.errors }">
+                        <div *ngIf="submitted && f2.password.errors" class="invalid-feedback">
+                          <div *ngIf="f2.password.errors.required">Password is required</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--</form>-->
+              </div>
+              <div class="footer-jo">
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group row">
+                      <div class="col-sm-12"><button type="button" class="btn btn-primary" (click)="onLogin()">Login</button></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+</div>
+        </div>
+       </form>
+      <!--</div>-->
+      <!--</div>-->
+    </div>
+  </section>
+</main>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+             size="medium" color="#fff" type="ball-clip-rotate-pulse" [fullScreen]="true">
+</ngx-spinner>
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- Footer End -->
+
+
+<!--end-->

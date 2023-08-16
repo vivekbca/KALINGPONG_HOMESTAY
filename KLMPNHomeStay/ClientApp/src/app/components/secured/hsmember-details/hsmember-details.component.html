@@ -1,0 +1,337 @@
+<!-- header -->
+<app-login-header></app-login-header>
+<!-- header End -->
+<div id="member-details" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<main>
+  <section class="features">
+    <div class="container">
+      <h2 class="section-header-two text-center">Home Stay Details</h2>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="modal-content" style="padding:0px; border:none;">
+          <div class="modal-body">
+
+            <div class="row">
+
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Home Stay Name </label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="hsName" formControlName="hsName" [ngClass]="{ 'is-invalid': submitted && f.hsName.errors }" [value]="HSName" readonly="readonly">
+                    <input type="hidden" formControlName="hsId" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HS Image1<span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'hs1')" class="form-control" id="hsImage1" formControlName="hsImage1" [ngClass]="{ 'is-invalid': submitted && f.hsImage1.errors }">
+                    <span style="color:red">{{imageError}}</span>
+                    <div *ngIf="submitted && f.hsImage1.errors" class="invalid-feedback">
+                      <div *ngIf="f.hsImage1.errors.required">Home Stay image is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HS Image2</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'hs2')" class="form-control" id="hsImage2" formControlName="hsImage2">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HS Image3</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'hs3')" class="form-control" id="hsImage3" formControlName="hsImage3">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HS Image4</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'hs4')" class="form-control" id="hsImage4" formControlName="hsImage4">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HS Image5</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'hs5')" class="form-control" id="hsImage5" formControlName="hsImage5">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HS Image6</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'hs6')" class="form-control" id="hsImage6" formControlName="hsImage6">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HS Image7</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'hs7')" class="form-control" id="hsImage7" formControlName="hsImage7">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HS Image8</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'hs8')" class="form-control" id="hsImage8" formControlName="hsImage8">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HS Image9</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'hs9')" class="form-control" id="hsImage9" formControlName="hsImage9">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HS Image10</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'hs10')" class="form-control" id="hsImage10" formControlName="hsImage10">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group row">
+                  <div class="col-sm-3">Room Image1<span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'ri1')" class="form-control" id="roomImage1" formControlName="roomImage1" [ngClass]="{ 'is-invalid': submitted && f.roomImage1.errors }">
+                    <span style="color:red">{{imageError}}</span>
+                    <div *ngIf="submitted && f.roomImage1.errors" class="invalid-feedback">
+                      <div *ngIf="f.roomImage1.errors.required">Room Image is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Room Image2</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'ri2')" class="form-control" id="roomImage2" formControlName="roomImage2">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Room Image3</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'ri3')" class="form-control" id="roomImage3" formControlName="roomImage3">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Room Image4</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'ri4')" class="form-control" id="roomImage4" formControlName="roomImage4">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Room Image5</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'ri5')" class="form-control" id="roomImage5" formControlName="roomImage5">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Room Image6</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'ri6')" class="form-control" id="roomImage6" formControlName="roomImage6">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Room Image7</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'ri7')" class="form-control" id="roomImage7" formControlName="roomImage7">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Room Image8</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'ri8')" class="form-control" id="roomImage8" formControlName="roomImage8">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Room Image9</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'ri9')" class="form-control" id="roomImage9" formControlName="roomImage9">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Room Image10</div>
+                  <div class="col-sm-9">
+                    <input type="file" accept="image/jpeg" (change)="detectFiles($event,'ri10')" class="form-control" id="roomImage10" formControlName="roomImage10">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Latitude</div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="latitude" formControlName="latitude">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Longitude</div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="longitude" formControlName="longitude">
+                    <span style="color:red">{{imageError}}</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </div>
+         
+        </div>
+      </form>
+      <!--Room Info Form-->
+      <!--Room Info-->
+      <!--<label style="color:red" class=""><b>Room Information</b></label><hr />
+      <button type="button" class="btn btn-primary" (click)="addRooms()">Add More Room</button>
+      <br /><br />
+            <form [formGroup]="roomForm">
+              <div formArrayName="roomAddArray">
+                <div *ngFor="let gDet of roomAddArray.controls; let i=index">
+                  <div class="frm" [formGroupName]="i">
+                    <div class="modal-content" style="padding:0px; border:none;">
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="form-group row">
+
+                              <label class="col-sm-3 col-form-label">Room Nos<span style="color:red">*</span> </label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" id="roomNo" formControlName="roomNo" [ngClass]="{ 'is-invalid': submitted && f.roomNo.errors }">
+                                <div *ngIf="submitted && f.roomNo.errors" class="invalid-feedback">
+                                  <div *ngIf="f.roomNo.errors.required">Room Nos is required</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Room Category <span style="color:red">*</span></label>
+                              <div class="col-sm-9">
+                                <select class="form-control" aria-label="Default select example" id="roomCategory" formControlName="roomCategory">
+                                  <option value="">--Select--</option>
+                                  <option *ngFor="let cat of roomCategories" [value]="cat.hsCategoryId">{{cat.hsCategoryName}}</option>
+                                </select>
+                                <div *ngIf="submitted && f.roomCategory.errors" class="invalid-feedback">
+                                  <div *ngIf="f.roomCategory.errors.required">Room Category is required</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Room Rate <span style="color:red">*</span></label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" id="roomRate" formControlName="roomRate" [ngClass]="{ 'is-invalid': submitted && f.roomRate.errors }">
+                                <div *ngIf="submitted && f.roomRate.errors" class="invalid-feedback">
+                                  <div *ngIf="f.roomRate.errors.required">Room Rate is required</div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="form-group row">
+                              <div class="col-sm-3">Room Facilities<span style="color:red">*</span></div>
+                              <div class="col-sm-9">
+                                <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="roomFacilities" id="roomFacility" formControlName="roomFacility">
+                                </ng-multiselect-dropdown>
+                              </div>
+                              <div *ngIf="submitted && f.roomFacility.errors" class="invalid-feedback">
+                                <div *ngIf="f.roomFacility.errors.required">Room Facility is required</div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-sm-3">Room Floor<span style="color:red">*</span></div>
+                              <div class="col-sm-9">
+                                <select class="form-control" aria-label="Default select example" id="roomFloor" formControlName="roomFloor">
+                                  <option value="">--Select--</option>
+                                  <option value="1st Floor">1st Floor</option>
+                                  <option value="2nd Floor">2nd Floor</option>
+                                  <option value="3rd Floor">3rd Floor</option>
+                                  <option value="4th Floor">4th Floor</option>
+                                </select>
+                                <div *ngIf="submitted && f.roomFloor.errors" class="invalid-feedback">
+                                  <div *ngIf="f.roomFloor.errors.required">Room Floor is required</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-sm-3">No. of Beds <span style="color:red">*</span></div>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" id="noOfBeds" formControlName="noOfBeds" [ngClass]="{ 'is-invalid': submitted && f.noOfBeds.errors }">
+                                <div *ngIf="submitted && f.noOfBeds.errors" class="invalid-feedback">
+                                  <div *ngIf="f.noOfBeds.errors.required">No. Of Beds is required</div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="form-group row">
+                              <div class="col-sm-3">Room Size in Sq ft. <span style="color:red">*</span></div>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" id="roomSize" formControlName="roomSize" [ngClass]="{ 'is-invalid': submitted && f.roomSize.errors }">
+                                <div *ngIf="submitted && f.roomSize.errors" class="invalid-feedback">
+                                  <div *ngIf="f.roomSize.errors.required">Room Size is required</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-sm-3">Room Image</div>
+                              <div class="col-sm-9">
+                                <input type="file" (change)="detectFiles($event,'room0')" class="form-control" id="roomImage" accept="image/jpeg" formControlName="roomImage" >
+                                <span style="color:red">{{imageError}}</span>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-sm-3">Is Available</div>
+                              <div class="col-sm-9">
+                                <select class="form-control" aria-label="Default select example" id="isAvailable" formControlName="isAvailable">
+                                  <option value="">--Select--</option>
+                                  <option value="1">Yes</option>
+                                  <option value="0">No</option>
+                                </select>
+                                <div *ngIf="submitted && f.isAvailable.errors" class="invalid-feedback">
+                                  <div *ngIf="f.isAvailable.errors.required">Room Available is required</div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>-->
+
+              <div class="footer-jo">
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit and Next</button>
+                  </div>
+                </div>
+              </div>
+            <!--</form>-->
+    </div>
+  </section>
+</main>
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- Footer End -->

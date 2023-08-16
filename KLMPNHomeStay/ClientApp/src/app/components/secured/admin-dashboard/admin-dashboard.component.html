@@ -1,0 +1,162 @@
+<!--<p>admin-dashboard works!</p>-->
+
+<app-login-header></app-login-header>
+<br />
+<main>
+  <div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+      <ul class="list-unstyled components">
+        <li class="active">
+          <a (click)="home()"><i class="fas fa-home"></i>Home</a>
+        </li>
+        <li>
+          <a (click)="notice()"><i class="fas fa-newspaper"></i>Notice</a>
+        </li>
+        <li>
+          <a (click)="tender()"><i class="fas fa-calendar"></i>Tender</a>
+        </li>
+        <li>
+          <a (click)="bookingHistory()"><i class="fas fa-hotel"></i>Booking History</a>
+        </li>
+        <li>
+          <a (click)="homeStayApproval()"><i class="fas fa-building"></i>HomeStay Approval</a>
+        </li>
+        <li>
+          <a (click)="AddPackage()"><i class="fas fa-plane-departure"></i>Add Package Tour</a>
+        </li>
+        <li>
+          <a (click)="HSPaymentApproval()"><i class="fas fa-money-bill"></i>HomeStay Payment Approval</a>
+        </li>
+        <li>
+          <a (click)="PackagePaymentApproval()"><i class="fas fa-money-bill"></i>Package Payment Approval</a>
+        </li>
+        <li>
+          <a (click)="HSRefund()"><i class="fas fa-reply"></i>HomeStay Booking Refund</a>
+        </li>
+        <li>
+          <a (click)="PackageRefund()"><i class="fas fa-reply"></i>Package Refund</a>
+        </li>
+        <li>
+          <a (click)="BookingReport()"><i class="fas fa-file"></i>Homestay Booking Report</a>
+        </li>
+        <li>
+          <a (click)="PackageReport()"><i class="fas fa-file"></i>Package Booking Report</a>
+        </li>
+        <li>
+          <a (click)="logout()"><i class="fas fa-key"></i>Logout</a>
+        </li>
+        <!--<li>
+    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-cube"></i>Pages</a>
+    <ul class="collapse list-unstyled" id="pageSubmenu">
+      <li>
+        <a href="#">Page 1</a>
+      </li>
+      <li>
+        <a href="#">Page 2</a>
+      </li>
+      <li>
+        <a href="#">Page 3</a>
+      </li>
+    </ul>
+  </li>-->
+
+      </ul>
+
+
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+      <button type="button" id="sidebarCollapse" class="btn btn-info">
+        <i class="fas fa-align-left"></i>
+        <span>Toggle Sidebar</span>
+      </button>
+
+      <div class="profile-section">
+        <h2>Admin Profile</h2>
+      </div>
+      <div class="profile-container">
+        <div class="row">
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="sreeda">
+              <h3>{{userName}}</h3>
+              <ul>
+                <li><i class="fas fa-phone-alt"></i>{{userMobile}}</li>
+                <li><i class="far fa-envelope"></i>{{userEmail}}</li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+          <!--<div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="lodges-kk">
+              <h3>0</h3>
+              <h2>Lodges Booked</h2>
+              <span class="icon-book"><i class="fas fa-bed"></i></span>
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="package-kk">
+              <h3>0</h3>
+              <h2>Package Booked</h2>
+              <span class="icon-book"><i class="fas fa-cubes"></i></span>
+            </div>
+          </div>-->
+        </div>
+        <!--<div class="last-transaction">
+          <h2>Home Stay Booked List</h2>-->
+          <!--<div class="transaction-table">
+
+
+            <table class="table table-hover">
+              <thead>
+
+                <tr>
+                  <th scope="col">Home Stay Name</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Amount</th>
+
+                  <th scope="col">Booked From</th>
+                  <th scope="col">Booked To</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>-->
+                <!--<tr *ngFor="let m of AllVisitedHomestayList">
+                  <td class="tbl2">{{m.homestayName}}</td>
+                  <td class="tbl2">{{m.address}}</td>
+                  <td class="tbl2">{{m.amonunt}}</td>
+                  <td class="tbl2">{{m.bookedfrom}}</td>
+                  <td class="tbl2">{{m.bookedTo}}</td>
+
+                  <td class="nav-item">-->
+
+                    <!--<a [routerLink]="['/Feedback', m.bookingId]">Add Feedback </a>-->
+                    <!--<a class="btn-primary" routerLink="/Feedback" *ngIf="m.isCompleted && !m.isFeedbackGiven" [queryParams]="{ bid: m.bookingId}">Add FEEDBACK </a>
+                    <a class="btn-primary" routerLink="/viewFeedback" *ngIf="m.isFeedbackGiven" [queryParams]="{ fid: m.feedbackid}"> View Feedback </a>
+
+                  </td>
+
+                </tr>-->
+              <!--</tbody>
+
+
+            </table>
+          </div>-->
+        <!--</div>-->
+
+
+      </div>
+
+
+    </div>
+  </div>
+
+</main>
+
+
+<app-footer></app-footer>
+

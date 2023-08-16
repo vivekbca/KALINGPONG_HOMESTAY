@@ -1,0 +1,60 @@
+<app-login-header></app-login-header>
+<section class="features">
+  <div class="container">
+
+    <h2 class="section-header-two text-center">
+      <a href="javascript:void(0);" (click)="back()">
+        <i class="fa fa fa-backspace"
+           aria-hidden="true"></i>
+      </a>&nbsp;Booking List
+    </h2>
+    <div>
+      <input checked type="radio" id="contactChoice1"
+             name="contact" value="Upcoming" (change)="onRadioChange($event.target.value)">&nbsp;
+      <label for="contactChoice1"><h4>Upcoming</h4></label>&nbsp;
+
+      <input type="radio" id="contactChoice2"
+             name="contact" value="Availed" (change)="onRadioChange($event.target.value)">&nbsp;
+      <label for="contactChoice2"><h4>Availed</h4></label>&nbsp;
+
+      <input type="radio" id="contactChoice3"
+             name="contact" value="Cancelled" (change)="onRadioChange($event.target.value)">&nbsp;
+      <label for="contactChoice3"><h4>Cancelled</h4></label>&nbsp;
+    </div>
+    <div class="modal-content" style="padding:0px; border:none;">
+      <div class="modal-body">
+        <form action="#" class="needs-validation" method="post" novalidate>
+          <div class="row">
+            <table class="table table-striped table-responsive-md btn-table">
+              <thead>
+                <tr>
+                  <th><h5><strong>Homestay</strong></h5></th>
+                  <th><h5><strong>Guest User Name</strong></h5></th>
+                  <th><h5><strong>State</strong></h5></th>
+                  <th><h5><strong>Booking From</strong></h5></th>
+                  <th><h5><strong>Booking To</strong></h5></th>
+                  <th><h5><strong>Action</strong></h5></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bk of BookingList | paginate: { itemsPerPage: 5, currentPage: p }">
+                  <td class="down">{{bk.hsName}}</td>
+                  <td class="down">{{bk.guName}}</td>
+                  <td class="down">{{bk.stateName}}</td>
+                  <td class="down">{{bk.bkDateFrom | date: 'dd-MM-yyyy'}}</td>
+                  <td class="down">{{bk.bkDateTo | date: 'dd-MM-yyyy'}}</td>
+                  <td><button type="button" class="btn btn-primary" (click)="BookingDetails(bk.hsBookingId)">View</button></td>
+                </tr>
+              </tbody>
+
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<app-footer></app-footer>

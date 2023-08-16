@@ -1,0 +1,8 @@
+.navbar-expand-lg .navbar-collapse  {
+  cursor: pointer;
+}
+
+.fa-search {
+  cursor: pointer;
+  color: #8d68c3;
+}

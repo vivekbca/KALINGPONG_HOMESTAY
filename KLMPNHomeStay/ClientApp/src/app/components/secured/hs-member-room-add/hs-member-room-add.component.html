@@ -1,0 +1,225 @@
+<!-- header -->
+<app-header></app-header>
+<!-- header End -->
+
+<main>
+  <div>
+    <section class="features">
+      <div class="container">
+        <h2 class="section-header-two text-center">
+          <!--<a href="javascript:void(0);" (click)="back()">
+            <i class="fa fa fa-backspace"
+               aria-hidden="true"></i>
+          </a>-->
+          Room Lists
+          <a href="javascript:void(0)" class="viwq" title="Add Room">
+            <i class="fa fa fa-plus-circle" aria-hidden="true" data-toggle="modal" data-target="#roomAdd"></i>
+          </a>
+
+        </h2>
+        <div class="modal-content" style="padding:0px; border:none;">
+          <div class="modal-body">
+            <table class="table" width="100%">
+              <thead>
+                <tr>
+                  <th width="10%" scope="col">Room No</th>
+                  <th width="15%" scope="col">Room Category</th>
+                  <th width="15%" scope="col">Room Rate</th>
+                  <th width="15%" scope="col">Room Size</th>
+                  <th width="15%" scope="col">Room Floor</th>
+                  <th width="10%" scope="col">No. of Bed</th>
+                  <th width="10%" scope="col">Is Available</th>
+                  <th width="10%">Edit</th>
+
+                  <th width="100px">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody style="max-height:450px">
+                <tr *ngFor="let el of roomList | paginate: { itemsPerPage: 5, currentPage: p }">
+                  <td width="140px">{{el.hsRoomNo}}</td>
+                  <td width="150px">{{el.categoryName}}</td>
+                  <td width="150px">{{el.hsRoomRate}}</td>
+                  <td width="140px">{{el.hsRoomSize}}</td>
+                  <td width="140px">{{el.hsRoomFloor}}</td>
+                  <td width="140px">{{el.hsRoomNoBeds}}</td>
+                  <td width="140px">{{el.IsAvailable}}</td>
+                  <td width="100px">
+                    <a href="javascript:void(0)" class="viwq" title="Add Room"><i (click)="onClickEdit(el.hsRoomNo)" class="fa fa fa-pencil-alt" aria-hidden="true" data-toggle="modal" data-target="#roomAdd"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="modal fade loginW100" id="roomAdd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <section class="features">
+          <h5 class="section-header-two text-center">
+            Room Add
+          </h5>
+          <div class="modal-content" style="padding:0px; border:none;">
+            <div class="modal-body">
+
+              <form [formGroup]="roomForm">
+                <div formArrayName="roomAddArray">
+                  <div *ngFor="let gDet of roomAddArray.controls; let i=index">
+                    <div class="frm" [formGroupName]="i">
+                      <div>
+                        <div class="modal-content" style="padding:0px; border:none;">
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="form-group row">
+
+                                  <label class="col-sm-3 col-form-label">Room Nos<span style="color:red">*</span> </label>
+                                  <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="roomNo" formControlName="roomNo" [ngClass]="{ 'is-invalid': submitted && f.roomNo.errors }">
+                                    <div *ngIf="submitted && f.roomNo.errors" class="invalid-feedback">
+                                      <div *ngIf="f.roomNo.errors.required">Room Nos is required</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Room Category <span style="color:red">*</span></label>
+                                  <div class="col-sm-9">
+                                    <select class="form-control" aria-label="Default select example" id="roomCategory" formControlName="roomCategory">
+                                      <option value="">--Select--</option>
+                                      <option *ngFor="let cat of roomCategories" [value]="cat.hsCategoryId">{{cat.hsCategoryName}}</option>
+                                    </select>
+                                    <div *ngIf="submitted && f.roomCategory.errors" class="invalid-feedback">
+                                      <div *ngIf="f.roomCategory.errors.required">Room Category is required</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Room Rate <span style="color:red">*</span></label>
+                                  <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="roomRate" formControlName="roomRate" [ngClass]="{ 'is-invalid': submitted && f.roomRate.errors }">
+                                    <div *ngIf="submitted && f.roomRate.errors" class="invalid-feedback">
+                                      <div *ngIf="f.roomRate.errors.required">Room Rate is required</div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                              <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="form-group row">
+                                  <div class="col-sm-3">Room Facilities<span style="color:red">*</span></div>
+                                  <div class="col-sm-9">
+                                    <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="roomFacilities" id="roomFacility" formControlName="roomFacility">
+                                    </ng-multiselect-dropdown>
+                                  </div>
+                                  <div *ngIf="submitted && f.roomFacility.errors" class="invalid-feedback">
+                                    <div *ngIf="f.roomFacility.errors.required">Room Facility is required</div>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <div class="col-sm-3">Room Floor<span style="color:red">*</span></div>
+                                  <div class="col-sm-9">
+                                    <select class="form-control" aria-label="Default select example" id="roomFloor" formControlName="roomFloor">
+                                      <option value="">--Select--</option>
+                                      <option value="1st Floor">1st Floor</option>
+                                      <option value="2nd Floor">2nd Floor</option>
+                                      <option value="3rd Floor">3rd Floor</option>
+                                      <option value="4th Floor">4th Floor</option>
+                                    </select>
+                                    <div *ngIf="submitted && f.roomFloor.errors" class="invalid-feedback">
+                                      <div *ngIf="f.roomFloor.errors.required">Room Floor is required</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <div class="col-sm-3">No. of Beds <span style="color:red">*</span></div>
+                                  <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="noOfBeds" formControlName="noOfBeds" [ngClass]="{ 'is-invalid': submitted && f.noOfBeds.errors }">
+                                    <div *ngIf="submitted && f.noOfBeds.errors" class="invalid-feedback">
+                                      <div *ngIf="f.noOfBeds.errors.required">No. Of Beds is required</div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                              <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="form-group row">
+                                  <div class="col-sm-3">Room Size in Sq ft. <span style="color:red">*</span></div>
+                                  <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="roomSize" formControlName="roomSize" [ngClass]="{ 'is-invalid': submitted && f.roomSize.errors }">
+                                    <div *ngIf="submitted && f.roomSize.errors" class="invalid-feedback">
+                                      <div *ngIf="f.roomSize.errors.required">Room Size is required</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <div class="col-sm-3">Room Image</div>
+                                  <div class="col-sm-9">
+                                    <input type="file" (change)="detectFiles($event,'room0')" class="form-control" id="roomImage" accept="image/jpeg" formControlName="roomImage">
+                                    <span style="color:red">{{imageError}}</span>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <div class="col-sm-3">Is Available</div>
+                                  <div class="col-sm-9">
+                                    <select class="form-control" aria-label="Default select example" id="isAvailable" formControlName="isAvailable">
+                                      <option value="">--Select--</option>
+                                      <option value="1">Yes</option>
+                                      <option value="0">No</option>
+                                    </select>
+                                    <div *ngIf="submitted && f.isAvailable.errors" class="invalid-feedback">
+                                      <div *ngIf="f.isAvailable.errors.required">Room Available is required</div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="footer-jo">
+                          <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                              <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+
+             
+            </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <button style="float:right" type="button" class="btn btn-primary" (click)="close()">Close</button>
+  </div>
+  <br /><br />
+  <br /><br />
+</div>
+
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- Footer End -->

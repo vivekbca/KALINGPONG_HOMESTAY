@@ -1,0 +1,277 @@
+<!-- header -->
+<app-login-header></app-login-header>
+<!-- header End -->
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<main>
+  <section class="features">
+    <div class="container">
+      <h2 class="section-header-two text-center">
+        <a href="javascript:void(0);" (click)="back()">
+          <i class="fa fa fa-backspace"
+             aria-hidden="true"></i>
+        </a>
+        Package Feedback
+      </h2>
+
+      <input checked type="radio" id="contactChoice1" style="height:20px; width:20px; vertical-align: middle;"
+             name="contact" value="Upcoming" (change)="onRadioChange($event.target.value)">&nbsp;
+      <label for="contactChoice1"><h4>Upcoming</h4></label>&nbsp;
+      <input type="radio" id="contactChoice2" style="height:20px; width:20px; vertical-align: middle;"
+             name="contact" value="Availed" (change)="onRadioChange($event.target.value)">&nbsp;
+      <label for="contactChoice2"><h4>Availed</h4></label>&nbsp;
+      <input type="radio" id="contactChoice3" style="height:20px; width:20px; vertical-align: middle;"
+             name="contact" value="Cancelled" (change)="onRadioChange($event.target.value)">&nbsp;
+      <label for="contactChoice3"><h4>Cancelled</h4></label>&nbsp;
+    </div>
+    <div class="last-transaction">
+      <h2>Package Booked List</h2>
+      <div class="modal-content" style="padding:0px; border:none;">
+        <div class="modal-body">
+          <form action="#" class="needs-validation" method="post" novalidate>
+            <div class="row">
+              <table class="table table-striped table-responsive-md btn-table">
+                <thead>
+                  <tr>
+                    <th width="15%" scope="col"><h5><strong>Package Name</strong></h5></th>
+                    <th width="20%" scope="col"><h5><strong>Guest User Name</strong></h5></th>
+                    <th width="20%" scope="col"><h5><strong>Destination</strong></h5></th>
+                    <th width="10%" scope="col"><h5><strong>Booking From</strong></h5></th>
+                    <th width="10%" scope="col"><h5><strong>Booking To</strong></h5></th>
+                    <th width="10%" scope="col" *ngIf="hideaction==false"><h5><strong>Action</strong></h5></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let bk of AllVisitedPackageList | paginate: { itemsPerPage: 5, currentPage: p }">
+                    <td class="down" width="140px">{{bk.name}}</td>
+                    <td class="down" width="140px">{{bk.guName}}</td>
+                    <td class="down" width="140px">{{bk.destination}}</td>
+                    <td class="down" width="140px">{{bk.fromDate | date: 'dd-MM-yyyy'}}</td>
+                    <td class="down" width="140px">{{bk.toDate | date: 'dd-MM-yyyy'}}</td>
+                    <td width="140px" *ngIf="feedbackhide==true || bk.isGiveFeedBack == true"><button type="button" class="btn btn-primary" (click)="ViewFeedback(bk.id)" data-toggle="modal" data-target="#login">View Feedback</button></td>
+                    <td width="140px" *ngIf="feedbackhide==false && bk.isFeedBackView==true"><button type="button" class="btn btn-primary" (click)="Feedback(bk.id)">Give Feedback</button></td>
+                    <td width="140px" *ngIf="cancelbooking==true"><button type="button" class="btn btn-danger" (click)="CancelBookingDetail(bk.id)" data-toggle="modal" data-target="#login2">Cancel Booking</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- Footer End -->
+<!--end-->
+<!--View Details Modal-->
+<div class="modal fade loginW100" id="login" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <section class="features">
+        <div class="container">
+          <h2 class="section-header-two text-center">
+            FeedBack Details
+          </h2>
+          <div class="modal-content" style="padding:0px; border:none;">
+            <div class="modal-body">
+              <form>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label"><h5><strong>Tour Name</strong></h5></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" size="40px" disabled><strong>{{feedbackDetails.tourName}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label"><h5><strong>Destination</strong></h5></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{feedbackDetails.destination}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label"><h5><strong>From Date</strong></h5></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{feedbackDetails.fromDt}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label"><h5><strong>To Date</strong></h5></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{feedbackDetails.toDt}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label"><h5><strong>Feedback</strong></h5></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{feedbackDetails.feedback}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-3"><h5><strong>Ratings</strong></h5></div>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{feedbackDetails.feedbackRating}} Star</strong></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<!--Modal End-->
+<!--Cancel Booking Modal-->
+<div class="modal fade loginW100" id="login2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <section class="features">
+        <div class="container">
+          <h2 class="section-header-two text-center">
+            Sad To See You Go&nbsp;<i class="fas fa-sad-tear" style="color:red"></i>
+          </h2>
+          <div class="modal-content" style="padding:0px; border:none;">
+            <div class="modal-body">
+              <form [formGroup]="cancelForm">
+                <div class="row" *ngFor="let canceldetail of canceldetail">
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Homestay Name</strong></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{canceldetail.tourName}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Homestay Address</strong></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{canceldetail.destination}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Booking From</strong></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{canceldetail.fromDt}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Booking To</strong></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{canceldetail.toDt}}</strong></label>
+                      </div>
+                    </div>
+                    <!--<div class="form-group row">
+                      <div class="col-sm-3" style="font-size:15px"><strong>Number Of Person</strong></div>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{canceldetail.bkNoPers}} Person</strong></label>
+                      </div>
+                    </div>-->
+                    <div class="form-group row">
+                      <div class="col-sm-3" style="font-size:15px"><strong>Booking Amount</strong></div>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{canceldetail.totalAmount}} </strong></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Bank Name <span style="color:red">*</span> </strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="Fname" formControlName="Bname" [ngClass]="{ 'is-invalid': submitted && f.Bname.errors }">
+                        <div *ngIf="submitted && f.Bname.errors" class="invalid-feedback">
+                          <div *ngIf="f.Bname.errors.required">Bank Name is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Branch Name <span style="color:red">*</span> </strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="Fname" formControlName="BranchName" [ngClass]="{ 'is-invalid': submitted && f.BranchName.errors }">
+                        <div *ngIf="submitted && f.BranchName.errors" class="invalid-feedback">
+                          <div *ngIf="f.BranchName.errors.required">Branch Name is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Account No. <span style="color:red">*</span> </strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="Fname" formControlName="AccNo" [ngClass]="{ 'is-invalid': submitted && f.AccNo.errors }">
+                        <div *ngIf="submitted && f.AccNo.errors" class="invalid-feedback">
+                          <div *ngIf="f.AccNo.errors.required">Account number is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Account Type <span style="color:red">*</span> </strong></label>
+                      <div class="col-sm-9">
+                        <!--<input type="text" class="form-control" id="Fname" formControlName="AccType" [ngClass]="{ 'is-invalid': submitted && f.AccType.errors }">-->
+                        <select class="form-control" id="exampleFormControlSelect1" formControlName="AccType" [ngClass]="{ 'is-invalid': submitted && f.AccType.errors }">
+                          <option value="">--Select--</option>
+                          <option value="Savings">Savings</option>
+                          <option value="Current">Current</option>
+                        </select>
+                        <div *ngIf="submitted && f.AccType.errors" class="invalid-feedback">
+                          <div *ngIf="f.AccType.errors.required">Account Type is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>IFSC <span style="color:red">*</span> </strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="Fname" formControlName="Ifsc" [ngClass]="{ 'is-invalid': submitted && f.Ifsc.errors }">
+                        <div *ngIf="submitted && f.Ifsc.errors" class="invalid-feedback">
+                          <div *ngIf="f.Ifsc.errors.required">IFSC is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Cancel Reason <span style="color:red">*</span> </strong></label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" id="Fname" formControlName="CancelReason" [ngClass]="{ 'is-invalid': submitted && f.CancelReason.errors }"></textarea>
+                        <div *ngIf="submitted && f.CancelReason.errors" class="invalid-feedback">
+                          <div *ngIf="f.CancelReason.errors.required">Reason is required</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="footer-jo">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group row">
+                          <div class="col-sm-12"><button type="button" class="btn btn-primary" (click)="cancel(canceldetail.tourBookingId)">Cancel Your Booking</button></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<!--Modal End-->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+             size="medium" color="#fff" type="ball-clip-rotate-pulse" [fullScreen]="true">
+</ngx-spinner>

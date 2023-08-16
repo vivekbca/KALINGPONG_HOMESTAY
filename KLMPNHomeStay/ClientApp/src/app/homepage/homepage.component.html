@@ -1,0 +1,473 @@
+<!-- header -->
+<app-header></app-header>
+<!-- header End -->
+<!-- Banner -->
+<section class="banner-deskstop">
+  <div class="slider_container">
+    <div class="flexslider" id="flexslider">
+      <ul class="slides">
+        <li>
+          <a href="#"><img src="assets/banner1.jpg" alt="" /></a>
+          <div class="flex-caption">
+            <div class="caption_title_line">
+              <h2>Feel at home come, stay & enjoy your day! </h2>
+
+
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="#"><img src="assets/banner2.jpg" alt="" title="" /></a>
+          <div class="flex-caption">
+            <div class="caption_title_line">
+              <h2>Feel at home come, stay & enjoy your day! </h2>
+
+
+            </div>
+          </div>
+        </li>
+        <!--       <li>
+                <a href="#"><img src="images/banner2.jpg" alt="" title=""/></a>
+
+              </li> -->
+
+
+      </ul>
+    </div>
+    <div class="quality-services">
+      <ul class="quality-5">
+        <li class="services-qt">Quality Services</li>
+        <li class="home-stay-qt">100+ Home Stay</li>
+        <li class="value-qt">Value of Money </li>
+        <li class="assitance-qt"> 24/7 Assitance</li>
+      </ul>
+    </div>
+    
+      <div class="marquee-dt">
+        <div class="box">
+          <marquee onMouseOver="this.stop()" onMouseOut="this.start()">
+            <span>{{marqueeHeading}}</span>
+          </marquee>
+        </div>
+        </div>
+  </div>
+</section>
+<!-- Banner End-->
+<!--<main>-->
+<!-- Offbeat Homes -->
+<section class="features">
+  <div class="container">
+    <div class="feature-content feature-content-slump">
+      <div class="row">
+        <div class="col-lg-8 order-2 order-lg-2">
+          <div class="village-dt">
+            <ul>
+              <li *ngFor="let popular of offbeat1" (click)="OffbitChange(popular.hsId)">
+                <div class="single-blog">
+                  <div class="blog-image">
+                    <a class="image-scale">
+                      <img src="assets/{{popular.hsLi1}}" alt="">
+                    </a>
+                  </div>
+                  <div class="blog-meta">
+                    <h2 class="date-type">
+                      {{popular.villName}}
+                    </h2>
+                    <p>{{popular.hsName}}</p>
+                  </div>
+                </div>
+              </li>
+
+
+              <li>
+                <div class="vill-box-three">
+                  <h2>ONLINE RESERVATION</h2>
+                  <form [formGroup]="bookNowForm" novalidate>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Select Villages </label>
+                      <div class="form-group">
+
+                        <select class="form-control" formControlName="villId" [ngClass]="{ 'is-invalid': submitted && f.villId.errors }" (change)="villChange($event.target.value)">
+                          <option value="">--Select Your Option--</option>
+                          <option *ngFor="let vill of villList" value={{vill.villId}} placeholder="Select your option">
+                            {{vill.village}}
+                          </option>
+                        </select>
+                        <div *ngIf="submitted && f.villId.errors" class="invalid-feedback">
+                          <div *ngIf="f.villId.errors.required">Village is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Select Homestay</label>
+                      <div class="form-group">
+
+                        <select class="form-control" formControlName="hsId" [ngClass]="{ 'is-invalid': submitted && f.hsId.errors }">
+                          <option value="">--Select Your Option--</option>
+                          <option *ngFor="let hs of hsList" value={{hs.hsId}} placeholder="Select your option">
+                            {{hs.hsName}}
+                          </option>
+                        </select>
+                        <div *ngIf="submitted && f.hsId.errors" class="invalid-feedback">
+                          <div *ngIf="f.hsId.errors.required">HomeStay is required</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" (click)="OnBooking()">Book Now</button>
+                  </form>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 order-1 order-lg-1">
+          <div class="feature-content-text">
+            <h1 class="section-header">Offbeat Homes</h1>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</section>
+
+<!-- Offbeat Homes End -->
+<!--My Popular Start-->
+<div id="booking" class="booking-section">
+  <div class="container">
+    <div class="row">
+      <div class="booking-form">
+        <div class="form-header">
+          <h1>Popular Destination Area</h1>
+        </div>
+        <form [formGroup]="popDestAreaForm">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <select class="form-control" required (change)="onPopularChange($event.target.value)" ng-required="true" formControlName="popularArea" [ngClass]="{ 'is-invalid': submitted && f.popularArea.errors }">
+                  <option value="" selected hidden>Popular Destination</option>
+                  <option *ngFor="let popular of AllPopularDestination" [value]="popular.destinationId">{{popular.destinationName}}</option>
+                </select>
+                <div *ngIf="submitted && f.popularArea.errors" class="invalid-feedback">
+                  <div *ngIf="f.popularArea.errors.required" style="color:yellow">Please Select Popular Area</div>
+                </div>
+                <span class="select-arrow"></span> <span class="form-label">Rooms</span>
+
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <select class="form-control" formControlName="homestay">
+                  <option value="" selected hidden>Homestays</option>
+                  <option *ngFor="let homestay of PopularHometsayList" [value]="homestay.hsId">{{homestay.hsName}}</option>
+                </select>
+                <span class="select-arrow"></span> <span class="form-label">Rooms</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-btn"> <button class="submit-btn" (click)="PopDestArea()">GO</button> </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--My polular End-->
+<!-- Popular Destinations -->
+<!--<section class="features">
+  <div class="container">
+    <div class="feature-content feature-content-slump">
+      <h2 class="section-header-two text-center">Popular Destinations</h2>
+      <div class="row">
+        <div class="owl-carousel owl-theme" id="owlcarousel">
+          <div class="item">
+            <div class="single-blog-two">
+              <div class="blog-image-two">
+                <a class="image-scale-three" href="#">
+                  <img src="assets/popular-1.jpg" alt="">
+                </a>
+              </div>
+              <span><i class="fas fa-map-marker-alt"></i> Village</span>
+            </div>
+            <div class="holl"> <h2><a href="">HOME STAY NAME </a></h2></div>
+
+          </div>
+          <div class="item">
+            <div class="single-blog-two">
+              <div class="blog-image-two">
+                <a class="image-scale-three" href="#">
+                  <img src="assets/popular-2.jpg" alt="">
+                </a>
+              </div>
+              <span><i class="fas fa-map-marker-alt"></i> Village</span>
+            </div>
+            <div class="holl"> <h2><a href="">HOME STAY NAME</a></h2></div>
+          </div>
+          <div class="item">
+            <div class="single-blog-two">
+              <div class="blog-image-two">
+                <a class="image-scale-three" href="#">
+                  <img src="assets/popular-3.jpg" alt="">
+                </a>
+              </div>
+              <span><i class="fas fa-map-marker-alt"></i> Village</span>
+            </div>
+            <div class="holl"> <h2><a href="">HOME STAY NAME </a></h2></div>
+
+          </div>
+          <div class="item">
+            <div class="single-blog-two">
+              <div class="blog-image-two">
+                <a class="image-scale-three" href="#">
+                  <img src="assets/popular-2.jpg" alt="">
+                </a>
+              </div>
+              <span><i class="fas fa-map-marker-alt"></i> Village</span>
+            </div>
+            <div class="holl"><h2><a href="">HOME STAY NAME</a></h2></div>
+
+          </div>
+          <div class="item">
+            <div class="single-blog-two">
+              <div class="blog-image-two">
+                <a class="image-scale-three" href="#">
+                  <img src="images/popular-1.jpg" alt="">
+                </a>
+              </div>
+              <span><i class="fas fa-map-marker-alt"></i> Village</span>
+            </div>
+            <div class="holl"> <h2><a href="">HOME STAY NAME</a></h2></div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+<!-- Popular Destinations End -->
+<!-- Popular Destinations -->
+<!--<section class="features">
+  <div class="container">
+    <div class="feature-content feature-content-slump">
+      <h2 class="section-header-two text-center">Popular Destinations</h2>
+      <div class="row">
+        <div class="owl-carousel owl-theme" id="owlcarousel">
+          <div class="item" *ngFor="let popular of PupularityImage">
+            <div class="single-blog-two">
+              <div class="blog-image-two">
+                <a class="image-scale-three" href="#">
+                  <img src="assets/{{popular.hsLi1}}" alt="">
+                </a>
+              </div>
+              <span><i class="fas fa-map-marker-alt"></i> {{popular.villName}}</span>
+            </div>
+            <div class="holl"><h2><a href="">{{popular.hsName}}</a></h2></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+<!-- Popular Destinations End -->
+<!-- Our Properties -->
+<section class="features" id="prop">
+  <div class="container">
+    <div class="row">
+      <h2 class="section-header-two text-center">Our Properties</h2>
+      <div id="parentHorizontalTab">
+        <ul class="resp-tabs-list hor_1" id="l1">
+          <li (click)="onChange('286a5567-3a9a-413d-aec2-09b7b7836dcd')">Forest Villages</li>
+          <li (click)="onChange('9f413008-d744-4c27-9ebb-bef7fe67880a')">Riverine Villages</li>
+          <li (click)="onChange('286a5568-3a9a-413d-aec2-09b7b7836dcd')"> Himalaya View Villages </li>
+          <li (click)="onChange('d3d6cceb-1ca2-4892-ba38-681cca2cfb19')">Offbeat Villages  </li>
+          <li (click)="onChange('286a5569-3a9a-413d-aec2-09b7b7836dcd')">Historical Villages</li>
+        </ul>
+        <div class="resp-tabs-container hor_1">
+          <div>
+            <div class="scrollable_div1 scrollator">
+              <div class="product-listing-page" *ngFor="let data of ourpropertydata">
+                <div class="product-listing-picture">
+                  <img src="assets/{{data.hsRoomImage}}">
+                </div>
+                <div class="product-listing-wirr">
+                  <div class="loge-ht">
+                    <h2>{{data.hsName}}</h2>
+                    <span>RS. {{data.hsRoomRate}}/night</span>
+                    <p>{{data.hsDescription}} </p>
+                  </div>
+                  <div class="loge-ht-bt">
+                    <a class="view-detail" (click)="OffbitChange(data.hsId)">View Details</a>
+                  </div>
+                  <div class="service-point">
+                    <ul *ngFor="let aminities of data.hsAmImg">
+                      <li *ngIf="aminities.amin" title="{{aminities.aminName}}"><img src="assets/{{aminities.amin}}"></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="scrollable_div1 scrollator">
+              <div class="product-listing-page" *ngFor="let data of ourpropertydata">
+                <div class="product-listing-picture">
+                  <img src="assets/{{data.hsRoomImage}}">
+                </div>
+                <div class="product-listing-wirr">
+                  <div class="loge-ht">
+                    <h2>{{data.hsName}}</h2>
+                    <span>RS. {{data.hsRoomRate}}/night</span>
+                    <p>{{data.hsDescription}} </p>
+                  </div>
+                  <div class="loge-ht-bt">
+                    <a class="view-detail" (click)="OffbitChange(data.hsId)">View Details</a>
+                    <!--<a href="" class="view-detail">Enquire Now</a>-->
+                  </div>
+                  <div class="service-point">
+                    <ul *ngFor="let aminities of data.hsAmImg">
+                      <li *ngIf="aminities.amin" title="{{aminities.aminName}}"><img src="assets/{{aminities.amin}}"></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="scrollable_div1 scrollator">
+              <div class="product-listing-page" *ngFor="let data of ourpropertydata">
+                <div class="product-listing-picture">
+                  <img src="assets/{{data.hsRoomImage}}">
+                </div>
+                <div class="product-listing-wirr">
+                  <div class="loge-ht">
+                    <h2>{{data.hsName}}</h2>
+                    <span>RS. {{data.hsRoomRate}}/night</span>
+                    <p>{{data.hsDescription}} </p>
+                  </div>
+                  <div class="loge-ht-bt">
+                    <a class="view-detail" (click)="OffbitChange(data.hsId)">View Details</a>
+                    <!--<a href="" class="view-detail">Enquire Now</a>-->
+                  </div>
+                  <div class="service-point">
+                    <ul *ngFor="let aminities of data.hsAmImg">
+                      <li *ngIf="aminities.amin" title="{{aminities.aminName}}"><img src="assets/{{aminities.amin}}"></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="scrollable_div1 scrollator">
+              <div class="product-listing-page" *ngFor="let data of ourpropertydata">
+                <div class="product-listing-picture">
+                  <img src="assets/{{data.hsRoomImage}}">
+                </div>
+                <div class="product-listing-wirr">
+                  <div class="loge-ht">
+                    <h2>{{data.hsName}}</h2>
+                    <span>RS. {{data.hsRoomRate}}/night</span>
+                    <p>{{data.hsDescription}} </p>
+                  </div>
+                  <div class="loge-ht-bt">
+                    <a class="view-detail" (click)="OffbitChange(data.hsId)">View Details</a>
+                    <!--<a href="" class="view-detail">Enquire Now</a>-->
+                  </div>
+                  <div class="service-point">
+                    <ul *ngFor="let aminities of data.hsAmImg">
+                      <li *ngIf="aminities.amin" title="{{aminities.aminName}}"><img src="assets/{{aminities.amin}}"></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+           </div>
+          <div>
+            <div class="scrollable_div1 scrollator">
+              <div class="product-listing-page" *ngFor="let data of ourpropertydata">
+                <div class="product-listing-picture">
+                  <img src="assets/{{data.hsRoomImage}}">
+                </div>
+                <div class="product-listing-wirr">
+                  <div class="loge-ht">
+                    <h2>{{data.hsName}}</h2>
+                    <span>RS. {{data.hsRoomRate}}/night</span>
+                    <p>{{data.hsDescription}} </p>
+                  </div>
+                  <div class="loge-ht-bt">
+                    <a class="view-detail" (click)="OffbitChange(data.hsId)">View Details</a>
+                    <!--<a href="" class="view-detail">Enquire Now</a>-->
+                  </div>
+                  <div class="service-point">
+                    <ul *ngFor="let aminities of data.hsAmImg">
+                      <li *ngIf="aminities.amin" title="{{aminities.aminName}}"><img src="assets/{{aminities.amin}}"></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Our Properties End -->
+
+<!--New Other Destination-->
+
+<section class="features">
+  <div class="container">
+    <div class="row">
+      <h2 class="section-header-two text-center">Other Destinations</h2>
+      <div class="col-lg-6 order-2 order-lg-2">
+        <div class="big-villege">
+          <img src="assets/villege-big-1.jpg">
+          <div class="text78">
+            <h3>Packaged Tours</h3>
+          </div>
+          <div class="description">
+            <img src="assets/30.png">
+          </div>
+          <a class="book" (click)="packageTourList()">Book Now</a>
+        </div>
+      </div>
+      <div class="col-lg-6 order-1 order-lg-1" >
+        <div class="destinations-section" >
+          <ul >
+            <li *ngFor="let data of otherDestination" (click)="VillageChange(data.villId)">
+              <div class="single-blog">
+                <div class="blog-image">
+
+                  <a class="image-scale-two">
+
+                    <img src="assets/{{data.villImage}}" alt="">
+
+                  </a>
+
+                </div>
+                <div class="text-88"><h3>{{data.villName}}</h3></div>
+              </div>
+
+            </li>                                  
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--New Other Destination End-->
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- Footer End -->

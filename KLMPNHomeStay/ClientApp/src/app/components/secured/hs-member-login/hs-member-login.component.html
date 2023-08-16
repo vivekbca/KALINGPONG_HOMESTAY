@@ -1,0 +1,73 @@
+<!--<p>admin-dashboard works!</p>-->
+
+<app-login-header></app-login-header>
+<br />
+<main>
+  <div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+      <ul class="list-unstyled components">
+        <li class="active">
+          <a (click)="home()"><i class="fas fa-home"></i>Home</a>
+        </li>
+        <li>
+          <a (click)="notice()"><i class="fas fa-newspaper"></i>Menu1</a>
+        </li>
+        <li>
+          <a (click)="tender()"><i class="fas fa-calendar"></i>Menu2</a>
+        </li>
+        <li>
+          <a (click)="bookingHistory()"><i class="fas fa-hotel"></i>Booking History</a>
+        </li>
+        <li>
+          <a (click)="logout()"><i class="fas fa-key"></i>Logout</a>
+        </li>
+       
+
+      </ul>
+
+
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+      <button type="button" id="sidebarCollapse" class="btn btn-info">
+        <i class="fas fa-align-left"></i>
+        <span>Toggle Sidebar</span>
+      </button>
+
+      <div class="profile-section">
+        <h2>Home Stay Member Profile</h2>
+      </div>
+      <div class="profile-container">
+        <div class="row">
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="sreeda">
+              <h3>{{userName}}</h3>
+              <ul>
+                <li><i class="fas fa-phone-alt"></i>{{userMobile}}</li>
+                <li><i class="far fa-envelope"></i>{{userEmail}}</li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+         
+        </div>
+        
+       
+
+
+      </div>
+
+
+    </div>
+  </div>
+
+</main>
+
+
+<app-footer></app-footer>
+

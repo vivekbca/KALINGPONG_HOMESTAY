@@ -1,0 +1,87 @@
+<!-- header -->
+<app-login-header></app-login-header>
+<br />
+<!-- header End -->
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<div>
+  <section class="features">
+    <div class="container">
+      <div class="col-lg-5 col-sm-12">
+        <h2 [hidden]="updatingTender" class="subTitle">
+          Tender Add
+        </h2>
+        <h2 [hidden]="!updatingTender" class="subTitle">
+          Tender Edit
+        </h2>
+      </div>
+      <form [formGroup]="tenderForm" novalidate>
+        <div class="row">
+          <div class="col-md-12 col-lg-12">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+
+
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Tender Subject<span style="color:red">*</span></label>
+                <div class="col-sm-9">
+                  <textarea class="form-control" formControlName="subject"></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Memo No<span style="color:red">*</span></label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="memoNo">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Financial Year<span style="color:red">*</span></label>
+                <div class="col-sm-9">
+                  <!--<input type="text" class="form-control" formControlName="finYr">-->
+                  <select class="form-control" formControlName="finYrId">
+                    <option value="">-Please Select-</option>
+                    <option *ngFor="let finYr of finYrList" value={{finYr.finYrId}}>
+                      {{finYr.finYr}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Closing Date<span style="color:red">*</span></label>
+                <div class="col-sm-9">
+                  <input type="date" class="form-control" formControlName="closingDate">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label [hidden]="updatingTender" class="col-sm-3 col-form-label">Tender File<span style="color:red">*</span></label>
+                <label [hidden]="!updatingTender" class="col-sm-3 col-form-label">Tender File</label>
+                <div class="col-sm-9">
+                  <input type="file" size="60" class="file" accept=".pdf" formControlName="refdoc1" (change)="onChangeFile($event)" />
+                  <!--<input type="file" size="60" class="file" accept=".pdf" />-->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-sm-8"><button type="button" class="btn btn-primary">Submit</button></div>-->
+        <div [hidden]="updatingTender" class="col-sm-8">
+          <button type="button" class="btn btn-primary" (click)="onSubmit()">
+            Add Tender
+          </button>
+          <button type="button" class="btn btn-danger" (click)="back()">Back</button>
+        </div>
+
+        <div [hidden]="!updatingTender" class="col-sm-8">
+          <button type="button" class="btn btn-primary" (click)="onUpdateTender()"> Edit Tender</button>
+          <button type="button" class="btn btn-danger" (click)="back()">Back</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- Footer End -->

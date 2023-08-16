@@ -1,0 +1,188 @@
+<app-header></app-header>
+<!--Search List-->
+<div id="booking" class="booking-section">
+  <div class="container">
+    <div class="row">
+      <div class="booking-form">
+        <div class="form-header">
+          <h1>Book Your Home</h1>
+        </div>
+        <form>
+      
+            <div class="col-md-12">
+              <div class="form-btn" style="width:150px;margin:0 auto;float:none"> <button  class="submit-btn" (click)="OnBooking(HomestayDetails.hsId)" >Book Now</button> </div>
+            </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Search list End-->
+<!--Homestay Details-->
+
+  <section class="gt-protion">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <div class="gt-stard-contain">
+            <div id="custCarousel" class="carousel slide" data-ride="carousel" align="center">
+              <!-- slides -->
+              <div class="carousel-inner">
+                <div class="carousel-item active" *ngIf="HomestayDetails.homestayImage1"> <img src="assets/{{HomestayDetails.homestayImage1}}" alt="Hills"> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.homestayImage2"> <img src="assets/{{HomestayDetails.homestayImage2}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.homestayImage3"> <img src="assets/{{HomestayDetails.homestayImage3}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.homestayImage4"> <img src="assets/{{HomestayDetails.homestayImage4}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.homestayImage5"> <img src="assets/{{HomestayDetails.homestayImage5}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.homestayImage6"> <img src="assets/{{HomestayDetails.homestayImage6}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.homestayImage7"> <img src="assets/{{HomestayDetails.homestayImage7}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.homestayImage8"> <img src="assets/{{HomestayDetails.homestayImage8}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.homestayImage9"> <img src="assets/{{HomestayDetails.homestayImage9}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.homestayImage10"> <img src="assets/{{HomestayDetails.homestayImage10}}" /> </div>
+              </div>
+              <!-- Left right --> <a class="carousel-control-prev" href="#custCarousel" data-slide="prev"> <span class="carousel-control-prev-icon"></span> </a> <a class="carousel-control-next" href="#custCarousel" data-slide="next"> <span class="carousel-control-next-icon"></span> </a> <!-- Thumbnails -->
+              <ol class="carousel-indicators list-inline">
+                <li class="list-inline-item active" *ngIf="HomestayDetails.homestayImage1"> <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#custCarousel"> <img src="assets/{{HomestayDetails.homestayImage1}}" alt="Hills" class="img-fluid"> </a> </li>
+                <li class="list-inline-item" *ngIf="HomestayDetails.homestayImage2"> <a id="carousel-selector-1" data-slide-to="1" data-target="#custCarousel">  <img src="assets/{{HomestayDetails.homestayImage2}}" class="img-fluid" /> </a> </li>
+                <li class="list-inline-item" *ngIf="HomestayDetails.homestayImage3"> <a id="carousel-selector-2" data-slide-to="2" data-target="#custCarousel">  <img src="assets/{{HomestayDetails.homestayImage3}}" class="img-fluid" /> </a> </li>
+                <li class="list-inline-item" *ngIf="HomestayDetails.homestayImage4"> <a id="carousel-selector-2" data-slide-to="3" data-target="#custCarousel"> <img src="assets/{{HomestayDetails.homestayImage4}}" class="img-fluid" /> </a> </li>
+                <li class="list-inline-item" *ngIf="HomestayDetails.homestayImage5"> <a id="carousel-selector-2" data-slide-to="4" data-target="#custCarousel"> <img src="assets/{{HomestayDetails.homestayImage5}}" class="img-fluid" /> </a> </li>
+                <li class="list-inline-item" *ngIf="HomestayDetails.homestayImage6"> <a id="carousel-selector-2" data-slide-to="5" data-target="#custCarousel">  <img src="assets/{{HomestayDetails.homestayImage6}}" class="img-fluid" /> </a> </li>
+                <li class="list-inline-item" *ngIf="HomestayDetails.homestayImage7"> <a id="carousel-selector-2" data-slide-to="6" data-target="#custCarousel"> <img src="assets/{{HomestayDetails.homestayImage7}}" class="img-fluid" /> </a> </li>
+                <li class="list-inline-item" *ngIf="HomestayDetails.homestayImage8"> <a id="carousel-selector-2" data-slide-to="6" data-target="#custCarousel"> <img src="assets/{{HomestayDetails.homestayImage8}}" class="img-fluid" /> </a> </li>
+                <li class="list-inline-item" *ngIf="HomestayDetails.homestayImage9"> <a id="carousel-selector-2" data-slide-to="6" data-target="#custCarousel"> <img src="assets/{{HomestayDetails.homestayImage9}}" class="img-fluid" /> </a> </li>
+                <li class="list-inline-item" *ngIf="HomestayDetails.homestayImage10"> <a id="carousel-selector-2" data-slide-to="6" data-target="#custCarousel"> <img src="assets/{{HomestayDetails.homestayImage10}}" class="img-fluid" /> </a> </li>
+              </ol>
+             
+
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <div class="ranabitan">
+            <h2>{{HomestayDetails.hsName}}</h2>
+            <p>Village : {{HomestayDetails.villageName}} and Address : {{HomestayDetails.hsAddress1}}  {{HomestayDetails.hsAddress2}} {{HomestayDetails.hsAddress3}} PIN - 765 543</p>
+          </div>
+          <div class="ranabitan-two">
+            <h2>How to reach</h2>
+            <p>{{HomestayDetails.hwtReach}}</p>
+          </div>
+          <div class="ranabitan-two">
+            <h2>Amenities</h2>
+            <div class="service-point">
+              <ul *ngFor="let aminities of HomestayAminities">
+                <li *ngIf="aminities.amin" title="{{aminities.aminName}}"><img src="assets/{{aminities.amin}}"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="ranabitan-two">
+            <h2>Add-on Services</h2>
+            <p>{{HomestayDetails.addonServices}}</p>
+          </div>
+          <div class="ranabitan-two">
+            <h2>Local Attractions</h2>
+            <p>{{HomestayDetails.localAttraction}}</p>
+          </div>
+          <a>Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="features">
+    <div class="container">
+      <div class="row">
+        <h2 class="section-header-two text-center">Tarrif</h2>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" width="5%"></th>
+                  <th scope="col" width="30%">Room type</th>
+                  <th scope="col" width="15%" style=" text-align: center;"> No. Of Beds </th>
+                  <th scope="col" width="15%" style=" text-align: center;">Tariff/night</th>
+                  <th scope="col" width="10%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rooms of HomestayDetails.tmHsRooms">
+                  <td scope="row">
+                    <div class="pic-prodtcu"><img src="assets/{{rooms.hsRoomImage}}"></div>
+                  </td>
+                  <td>
+                    <div class="prodtcu-ditails">
+                      <h3>{{rooms.hsCategoryName}}</h3>
+                      <p>Room Facilities </p>
+                      <div class="service-point">
+                        <ul *ngFor="let aminities of rooms.facilitymodel">
+                          <li *ngIf="aminities.facilityId" title="{{aminities.facilityName}}"><img src="assets/{{aminities.facilityId}}"></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td style=" text-align: center;">{{rooms.hsRoomNoBeds}}</td>
+                  <td style=" text-align: center;">₹{{rooms.hsRoomRate}}/Head</td>
+                  <!--<td><a href="#" class="bokk">Book</a></td>-->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <div class="gt-stard-contain">
+            <div id="custCarousel" class="carousel slide" data-ride="carousel" align="center">
+              <!-- slides -->
+              <div class="carousel-inner">
+                <div class="carousel-item active" *ngIf="HomestayDetails.hsRi1">  <img src="assets/{{HomestayDetails.hsRi1}}" alt="Hills"> </div>
+                <!--<div *ngFor="let rooms of HomestayDetails.tmHsRooms">-->
+                <div class="carousel-item" *ngIf="HomestayDetails.hsRi2"> <img src="assets/{{HomestayDetails.hsRi2}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.hsRi3"> <img src="assets/{{HomestayDetails.hsRi3}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.hsRi4"> <img src="assets/{{HomestayDetails.hsRi4}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.hsRi5"> <img src="assets/{{HomestayDetails.hsRi5}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.hsRi6"> <img src="assets/{{HomestayDetails.hsRi6}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.hsRi7"> <img src="assets/{{HomestayDetails.hsRi7}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.hsRi8"> <img src="assets/{{HomestayDetails.hsRi8}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.hsRi9"> <img src="assets/{{HomestayDetails.hsRi9}}" /> </div>
+                <div class="carousel-item" *ngIf="HomestayDetails.hsRi10"> <img src="assets/{{HomestayDetails.hsRi10}}" /> </div>
+                <!--</div>-->
+              </div>
+
+            </div>
+          </div>
+        </div><br />
+        <div id="booking" class="booking-section" style="margin-top:20px">
+          <div class="container">
+            <div class="row">
+              <div class="booking-form">
+                <form>
+                  <div class="col-md-12">
+                    <div class="form-btn" style="width:150px;margin:0 auto;float:none"> <button class="submit-btn" (click)="OnBooking(HomestayDetails.hsId)">Check Availibility</button> </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+</section>
+  <section class="gt-protion">
+    <div class="container">
+      <h2 class="section-header-two text-center">Directions</h2>
+      <div class="row">
+
+        <!--<iframe src="https://maps.google.com/maps?q={{HomestayDetails.HsMapLat}},{{HomestayDetails.HsMapLong}}&z=16&output=embed" width="100%" height="450" allowfullscreen="" loading="lazy" style="border:1px solid #ccc"></iframe>-->
+        <iframe [src]="FullMapUrl" width="100%" height="450" allowfullscreen="" loading="lazy" style="border:1px solid #ccc"></iframe>
+
+      </div>
+    </div>
+  </section>
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+               size="medium" color="#fff" type="ball-clip-rotate-pulse" [fullScreen]="true">
+  </ngx-spinner>
+
+<!--Homestay Details End-->
+<app-footer></app-footer>
+
+
+

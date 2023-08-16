@@ -1,0 +1,97 @@
+<app-login-header></app-login-header>
+<br />
+<br />
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<br />
+<!--Search Area-->
+<div id="booking" class="booking-section">
+  <div class="container">
+    <div class="row">
+      <div class="booking-form">
+        <div class="form-header">
+          <h1>Search Your Homestay</h1>
+        </div>
+        <form [formGroup]="searchForm">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <select class="form-control" (change)="onBlockChange($event.target.value)" formControlName="blockId" [ngClass]="{ 'is-invalid': submitted && f.blockId.errors }">
+                  <option value="" selected hidden>Select Block</option>
+                  <option *ngFor="let block of BlockList" [value]="block.blockId">{{block.blockName}}</option>
+                </select>
+                <div *ngIf="submitted && f.blockId.errors" class="invalid-feedback">
+                  <div *ngIf="f.blockId.errors.required">Block is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <select class="form-control" (change)="onVillageChange($event.target.value)" formControlName="villageId" [ngClass]="{ 'is-invalid': submitted && f.villageId.errors }">
+                  <option value="" selected hidden>Select Village</option>
+                  <option *ngFor="let village of VillageList" [value]="village.villId">{{village.villName}}</option>
+                </select>
+                <div *ngIf="submitted && f.villageId.errors" class="invalid-feedback">
+                  <div *ngIf="f.villageId.errors.required">Village is required</div>
+                </div>
+                <span class="select-arrow"></span> <span class="form-label">Rooms</span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <select class="form-control" formControlName="homestayId">
+                  <option value="" selected hidden>Select Homestays</option>
+                  <option *ngFor="let homestay of HomestayList" [value]="homestay.hsId">{{homestay.hsName}}</option>
+                </select>
+                <span class="select-arrow"></span> <span class="form-label">Rooms</span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-btn"> <button class="submit-btn" (click)="onSubmit()">Search</button> </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--search Area End-->
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<section class="features">
+  <div class="container">
+    <div class="scrollable_div1">
+      <div class="product-listing-page" *ngFor="let data of villagelistdata">
+        <div class="product-listing-picture">
+          <img src="assets/{{data.hsRoomImage}}">
+        </div>
+        <div class="product-listing-wirr">
+          <div class="loge-ht">
+            <h2>{{data.hsName}}</h2>
+            <span>RS. {{data.hsRoomRate}}/night</span>
+            <p>{{data.hsDescription}} </p>
+          </div>
+          <div class="loge-ht-bt">
+            <a class="view-detail" (click)="VillageChange(data.hsId)">View Details</a>
+          </div>
+          <div class="service-point">
+            <ul *ngFor="let aminities of data.hsAmImg">
+              <li *ngIf="aminities.amin" title="{{aminities.aminName}}"><img src="assets/{{aminities.amin}}"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+             size="medium" color="#fff" type="ball-clip-rotate-pulse" [fullScreen]="true">
+</ngx-spinner>
+<app-footer></app-footer>
+

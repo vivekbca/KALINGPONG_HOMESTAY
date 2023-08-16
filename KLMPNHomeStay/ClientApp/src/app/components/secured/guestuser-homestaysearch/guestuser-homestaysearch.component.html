@@ -1,0 +1,76 @@
+<header>
+  <div class="container-fluid">
+    <div class="section-top">
+      <div class="row">
+        <div class="col-sm-11 col-md-11 col-lg-11">
+          <div class="left-first-part">
+            <div class="logo-section"><img src="assets/logo.png"></div>
+            <div class="andhra-point">
+              <h2>Kalimpong District Homestay Tourism <br />Co-operative Society Ltd. </h2>
+              <p>A SMART STEP IN HILL TOURISM</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-1 col-md-1 col-lg-1">
+          <div class="selaction-aria">
+            <div class="home-icon-aria" style="float:right">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!--Search Area-->
+<div id="booking" class="booking-section">
+  <div class="container">
+    <div class="row">
+      <div class="booking-form">
+        <div class="form-header">
+          <h1>Search Your Homestay</h1>
+        </div>
+        <form [formGroup]="searchForm">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <select class="form-control" (change)="onBlockChange($event.target.value)" formControlName="blockId" [ngClass]="{ 'is-invalid': submitted && f.blockId.errors }">
+                  <option value="" selected hidden>Select Block</option>
+                  <option *ngFor="let block of BlockList" [value]="block.blockId">{{block.blockName}}</option>
+                </select>
+                <div *ngIf="submitted && f.blockId.errors" class="invalid-feedback">
+                  <div *ngIf="f.blockId.errors.required">Block is required</div>
+                </div>
+                <span class="select-arrow"></span> <span class="form-label">Rooms</span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <select class="form-control" (change)="onVillageChange($event.target.value)" formControlName="villageId" [ngClass]="{ 'is-invalid': submitted && f.villageId.errors }">
+                  <option value="" selected hidden>Select Village</option>
+                  <option *ngFor="let village of VillageList" [value]="village.villId">{{village.villName}}</option>
+                </select>
+                <div *ngIf="submitted && f.villageId.errors" class="invalid-feedback">
+                  <div *ngIf="f.villageId.errors.required">Village is required</div>
+                </div>
+                <span class="select-arrow"></span> <span class="form-label">Rooms</span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <select class="form-control" formControlName="homestayId">
+                  <option value="" selected hidden>Select Homestays</option>
+                  <option *ngFor="let homestay of HomestayList" [value]="homestay.hsId">{{homestay.hsName}}</option>
+                </select>
+                <span class="select-arrow"></span> <span class="form-label">Rooms</span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-btn"> <button class="submit-btn" (click)="onSubmit()">Search</button> </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--search Area End-->

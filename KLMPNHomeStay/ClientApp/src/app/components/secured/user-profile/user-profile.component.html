@@ -1,0 +1,338 @@
+
+<app-login-header></app-login-header>
+<main>
+  <div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+      <ul class="list-unstyled components">
+        <li class="active">
+          <a href=""><i class="fas fa-home"></i>Home</a>
+        </li>
+        <li>
+          <a class="curson" (click)="searchHomestay()"><i class="fas fa-hotel"></i>Book Your Lodge</a>
+        </li>
+        <li>
+          <a href="/online-booking"><i class="fas fa-hotel"></i>Book Your HomeStay</a>
+        </li>
+        <li>
+          <a href="/package-feedback"><i class="fas fa-hotel"></i>Package Feedback</a>
+        </li>
+        <li>
+          <a class="curson" (click)="BookPackage()"><i class="fas fa-hotel"></i>Book Your Package</a>
+        </li>
+        <!--<li>
+    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-cube"></i>Pages</a>
+    <ul class="collapse list-unstyled" id="pageSubmenu">
+      <li>
+        <a href="#">Page 1</a>
+      </li>
+      <li>
+        <a href="#">Page 2</a>
+      </li>
+      <li>
+        <a href="#">Page 3</a>
+      </li>
+    </ul>
+  </li>-->
+
+      </ul>
+    </nav>
+    <!-- Page Content  -->
+    <div id="content">
+      <button type="button" id="sidebarCollapse" class="btn btn-info">
+        <i class="fas fa-align-left"></i>
+        <span>Toggle Sidebar</span>
+      </button>
+      <div class="profile-section">
+        <h2>User Profile</h2>
+      </div>
+      <div class="profile-container">
+        <div class="row">
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="sreeda">
+              <h3>{{userName}}</h3>
+              <ul>
+                <li><i class="fas fa-phone-alt"></i>{{mobileNo}}</li>
+                <li><i class="far fa-envelope"></i> {{email}}</li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="lodges-kk">
+              <h3>{{lodgeCount}}</h3>
+              <h2>Lodges Booked</h2>
+              <span class="icon-book"><i class="fas fa-bed"></i></span>
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="package-kk">
+              <h3>{{PackageCount}}</h3>
+              <h2>Package Booked</h2>
+              <span class="icon-book"><i class="fas fa-cubes"></i></span>
+            </div>
+          </div>
+        </div><br />
+        <div>
+          <input checked type="radio" id="contactChoice1" style="height:20px; width:20px; vertical-align: middle;"
+                 name="contact" value="Upcoming" (change)="onRadioChange($event.target.value)">&nbsp;
+          <label for="contactChoice1"><h4>Upcoming</h4></label>&nbsp;
+          <input type="radio" id="contactChoice2" style="height:20px; width:20px; vertical-align: middle;"
+                 name="contact" value="Availed" (change)="onRadioChange($event.target.value)">&nbsp;
+          <label for="contactChoice2"><h4>Availed</h4></label>&nbsp;
+          <input type="radio" id="contactChoice3" style="height:20px; width:20px; vertical-align: middle;"
+                 name="contact" value="Cancelled" (change)="onRadioChange($event.target.value)">&nbsp;
+          <label for="contactChoice3"><h4>Cancelled</h4></label>&nbsp;
+        </div>
+        <div class="last-transaction">
+          <h2>Home Stay Booked List</h2>
+          <div class="modal-content" style="padding:0px; border:none;">
+            <div class="modal-body">
+              <form action="#" class="needs-validation" method="post" novalidate>
+                <div class="row">
+                  <table class="table table-striped table-responsive-md btn-table">
+                    <thead>
+                      <tr>
+                        <th><h5><strong>Homestay</strong></h5></th>
+                        <th><h5><strong>Guest User Name</strong></h5></th>
+                        <th><h5><strong>Address</strong></h5></th>
+                        <th><h5><strong>Booking From</strong></h5></th>
+                        <th><h5><strong>Booking To</strong></h5></th>
+                        <th *ngIf="hideaction==false"><h5><strong>Action</strong></h5></th>
+                        <th *ngIf="hideaction==true"><h5><strong>Cancelled On</strong></h5></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let bk of AllVisitedHomestayList | paginate: { itemsPerPage: 5, currentPage: p }">
+                        <td class="down">{{bk.hsName}}</td>
+                        <td class="down">{{bk.guName}}</td>
+                        <td class="down">{{bk.hsAddress1}}</td>
+                        <td class="down">{{bk.bkDateFrom | date: 'dd-MM-yyyy'}}</td>
+                        <td class="down">{{bk.bkDateTo | date: 'dd-MM-yyyy'}}</td>
+                        <td class="down">{{bk.bkCancelledDate | date: 'dd-MM-yyyy'}}</td>
+                        <td *ngIf="feedbackhide==true || bk.isFeedBackView==false"><button type="button" class="btn btn-primary" (click)="ViewFeedback(bk.hsBookingId)" data-toggle="modal" data-target="#login">View Feedback</button></td>
+                        <td *ngIf="feedbackhide==false && bk.isFeedBackView==true"><button type="button" class="btn btn-primary" (click)="Feedback(bk.hsBookingId)">Give Feedback</button></td>
+                        <td *ngIf="cancelbooking==true"><button type="button" class="btn btn-danger" (click)="CancelBookingDetail(bk.hsBookingId)" data-toggle="modal" data-target="#login2">Cancel</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<hr />
+
+
+<app-footer></app-footer>
+
+<!--View Details Modal-->
+<div class="modal fade loginW100" id="login" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <section class="features">
+        <div class="container">
+          <h2 class="section-header-two text-center">
+            FeedBack Details
+          </h2>
+          <div class="modal-content" style="padding:0px; border:none;">
+            <div class="modal-body">
+              <form>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12" *ngFor="let FeedbackDetails of FeedbackDetails">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label"><h5><strong>Homestay Name</strong></h5></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{FeedbackDetails.hsName}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label"><h5><strong>Homestay Address</strong></h5></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{FeedbackDetails.hsAddress1}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label"><h5><strong>Homestay Email Id</strong></h5></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{FeedbackDetails.hsContactEmail}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label"><h5><strong>Feedback</strong></h5></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{FeedbackDetails.hsFeedback}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-3"><h5><strong>Ratings</strong></h5></div>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled><strong>{{FeedbackDetails.hsRatings}} Star</strong></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<!--Modal End-->
+<!--Cancel Booking Modal-->
+<div class="modal fade loginW100" id="login2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <section class="features">
+        <div class="container">
+          <h2 class="section-header-two text-center">
+            Sad To See You Go&nbsp;<i class="fas fa-sad-tear" style="color:red"></i>
+          </h2>
+          <div class="modal-content" style="padding:0px; border:none;">
+            <div class="modal-body">
+              <form [formGroup]="cancelForm" (ngSubmit)="onSubmit()">
+                <div class="row" *ngFor="let canceldetail of canceldetail">
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Homestay Name</strong></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled style="background-color:thistle"><strong>{{canceldetail.hsName}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Homestay Address</strong></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled style="background-color:thistle"><strong>{{canceldetail.hsAddress1}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Booking From</strong></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled style="background-color:thistle"><strong>{{canceldetail.bkDateFrom | date: 'dd-MM-yyyy'}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Booking To</strong></label>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled style="background-color:thistle"><strong>{{canceldetail.bkDateTo | date: 'dd-MM-yyyy'}}</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-3" style="font-size:15px"><strong>Number Of Person</strong></div>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled style="background-color:thistle"><strong>{{canceldetail.bkNoPers}} Person</strong></label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-3" style="font-size:15px"><strong>Booking Amount</strong></div>
+                      <div class="col-sm-9">
+                        <label class="form-control" id="Lname" size="40px" disabled style="background-color:thistle"><strong>{{canceldetail.bkPaymentAmount}} Rupees</strong></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Bank Name <span style="color:red">*</span></strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="Fname" formControlName="Bname" [ngClass]="{ 'is-invalid': submitted && f.Bname.errors }">
+                        <div *ngIf="submitted && f.Bname.errors" class="invalid-feedback">
+                          <div *ngIf="f.Bname.errors.required">Bank Name is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Branch Name <span style="color:red">*</span></strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="Fname" formControlName="BranchName" [ngClass]="{ 'is-invalid': submitted && f.BranchName.errors }">
+                        <div *ngIf="submitted && f.BranchName.errors" class="invalid-feedback">
+                          <div *ngIf="f.BranchName.errors.required">Branch Name is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Account No.<span style="color:red">*</span></strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="Fname" formControlName="AccNo" [ngClass]="{ 'is-invalid': submitted && f.AccNo.errors }">
+                        <div *ngIf="submitted && f.AccNo.errors" class="invalid-feedback">
+                          <div *ngIf="f.AccNo.errors.required">Account number is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Account Type <span style="color:red">*</span></strong></label>
+                      <div class="col-sm-9">
+                        <!--<input type="text" class="form-control" id="Fname" formControlName="AccType" [ngClass]="{ 'is-invalid': submitted && f.AccType.errors }">-->
+                        <select class="form-control" id="exampleFormControlSelect1" formControlName="AccType" [ngClass]="{ 'is-invalid': submitted && f.AccType.errors }">
+                          <option value="">--Select--</option>
+                          <option value="Savings">Savings</option>
+                          <option value="Current">Current</option>
+                        </select>
+                        <div *ngIf="submitted && f.AccType.errors" class="invalid-feedback">
+                          <div *ngIf="f.AccType.errors.required">Account Type is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>IFSC <span style="color:red">*</span></strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="Fname" formControlName="ifsc" [ngClass]="{ 'is-invalid': submitted && f.ifsc.errors }">
+                        <div *ngIf="submitted && f.ifsc.errors" class="invalid-feedback">
+                          <div *ngIf="f.ifsc.errors.required">IFSC is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label" style="font-size:15px"><strong>Cancel Reason <span style="color:red">*</span> </strong></label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" id="Fname" formControlName="CancelReason" [ngClass]="{ 'is-invalid': submitted && f.CancelReason.errors }"></textarea>
+                        <div *ngIf="submitted && f.CancelReason.errors" class="invalid-feedback">
+                          <div *ngIf="f.CancelReason.errors.required">Reason is required</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer-jo">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group row">
+                          <div class="col-sm-12"><button type="button" class="btn btn-primary" (click)="cancel(canceldetail.hsBookingId)">Cancel Your Booking</button></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!--Modal End-->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+             size="medium" color="#fff" type="ball-clip-rotate-pulse" [fullScreen]="true">
+</ngx-spinner>

@@ -1,0 +1,65 @@
+<!--<p>booking-detail works!</p>-->
+<!-- header -->
+<app-header></app-header>
+<!-- header End -->
+
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<main>
+  <div>
+    <section class="features">
+      <div class="table-responsive mx-ht">
+        <!--<div *ngFor="let el of roomDetail">-->
+          <table class="table table-fixed mg-btm">
+            <thead>
+              <tr>
+
+                <th width="140px">HomeStay Name</th>
+
+
+                <th width="100px">&nbsp;</th>
+              </tr>
+            </thead>
+           
+            <tbody style="max-height:450px">
+
+              <!--<tr *ngFor="let el of noticeList; let i=index;">-->
+              <!--<td width="150px">{{(pageNo * pageSize)+i+1}}</td>-->
+              <!--<td width="140px">{{ index + 1 }}</td>-->
+              <!--<td width="140px">{{el.heading}}</td>
+          <td width="150px">{{el.subject}}</td>
+          <td width="140px">{{el.publishingDate| date: 'dd-MM-yyyy'}}</td>
+          <td width="70px" class="actioncol">
+            <a href="javascript:void(0);" class="viwq"><i class="fa fa fa-file" aria-hidden="true" (click)="viewFile(el.noticeId)"></i></a>
+          </td>
+          <td width="100px"><a href="javascript:void(0);" class="viwq"><i class="fa fa fa-pencil-alt" aria-hidden="true" (click)="onClickEdit(el.noticeId)"></i></a></td>
+        </tr>-->
+            </tbody>
+
+          </table>
+          <table class="table table-fixed mg-btm">
+            <thead>
+              <tr>
+                <!-- <th width="20px">#</th> -->
+                <!--<th width="150px">Sl No.</th>-->
+                <th width="140px">Date</th>
+                <th width="150px">Room No</th>
+                <th width="150px">Category</th>
+                <th width="140px">Rate</th>
+
+
+                <th width="100px">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody style="max-height:450px">
+            </tbody>
+
+          </table>
+        <!--</div>-->
+      </div>
+</section>
+  </div>
+</main>

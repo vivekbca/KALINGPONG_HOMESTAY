@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KLMPNHomeStay", "KLMPNHomeStay\KLMPNHomeStay.csproj", "{83BD04DB-193B-4498-8217-0B05AE9E6F75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBScript", "DBScript", "{6821EFB8-5B21-42AE-BBDE-729735D5EF0F}"
+	ProjectSection(SolutionItems) = preProject
+		klmpnhomestay_db_24082021.sql = klmpnhomestay_db_24082021.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB_ChangeDocument", "DB_ChangeDocument", "{E12D4186-56B8-4AD9-A2DA-573AA57B1229}"
+	ProjectSection(SolutionItems) = preProject
+		ChangeScript.sql = ChangeScript.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83BD04DB-193B-4498-8217-0B05AE9E6F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83BD04DB-193B-4498-8217-0B05AE9E6F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83BD04DB-193B-4498-8217-0B05AE9E6F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83BD04DB-193B-4498-8217-0B05AE9E6F75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {853F3612-BA67-4E1A-B310-B6D28D38251C}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://103.107.66.140:8080/tfs/xiphoscollection4
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = KLMPNHomeStay\\KLMPNHomeStay.csproj
+		SccProjectName1 = KLMPNHomeStay
+		SccLocalPath1 = KLMPNHomeStay
+	EndGlobalSection
+EndGlobal

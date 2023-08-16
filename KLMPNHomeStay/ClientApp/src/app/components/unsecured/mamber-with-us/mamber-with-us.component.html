@@ -1,0 +1,308 @@
+<!-- header -->
+<app-header></app-header>
+<!-- header End -->
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<main>
+  <section class="features">
+    <div class="container-fluid">
+      <h2 class="section-header-two text-center">Member With Us</h2>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="modal-content" style="padding:0px; border:none;">
+          <div class="modal-body">
+
+            <div class="row">
+
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Home Stay Name <span style="color:red">*</span></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="hsName" formControlName="hsName" [ngClass]="{ 'is-invalid': submitted && f.hsName.errors }">
+                    <div *ngIf="submitted && f.hsName.errors" class="invalid-feedback">
+                      <div *ngIf="f.hsName.errors.required">Name is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Home Stay Description <span style="color:red">*</span></label>
+                  <div class="col-sm-9">
+                    <textarea rows="3" class="form-control" id="homeStayDesc" formControlName="homeStayDesc" [ngClass]="{ 'is-invalid': submitted && f.homeStayDesc.errors }"></textarea>
+                    <div *ngIf="submitted && f.homeStayDesc.errors" class="invalid-feedback">
+                      <div *ngIf="f.homeStayDesc.errors.required">Home Stay Description is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Local Attraction <span style="color:red">*</span></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="localAttraction" formControlName="localAttraction" [ngClass]="{ 'is-invalid': submitted && f.localAttraction.errors }">
+                    <div *ngIf="submitted && f.localAttraction.errors" class="invalid-feedback">
+                      <div *ngIf="f.localAttraction.errors.required">Local Attraction is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">How to Reach <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="hwtReach" formControlName="hwtReach" [ngClass]="{ 'is-invalid': submitted && f.hwtReach.errors }">
+                    <div *ngIf="submitted && f.hwtReach.errors" class="invalid-feedback">
+                      <div *ngIf="f.hwtReach.errors.required">HWT is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HomeStay Address 1 <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="address1" formControlName="address1" [ngClass]="{ 'is-invalid': submitted && f.address1.errors }">
+                    <div *ngIf="submitted && f.address1.errors" class="invalid-feedback">
+                      <div *ngIf="f.address1.errors.required">Address is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HomeStay Address 2 <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="address2" formControlName="address2" [ngClass]="{ 'is-invalid': submitted && f.address2.errors }">
+                    <div *ngIf="submitted && f.address2.errors" class="invalid-feedback">
+                      <div *ngIf="f.address2.errors.required">Address is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">HomeStay Address 3</div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="address3" formControlName="address3">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Pin Code <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="txtPinCode" formControlName="txtPinCode" [ngClass]="{ 'is-invalid': submitted && f.txtPinCode.errors }">
+                    <div *ngIf="submitted && f.txtPinCode.errors" class="invalid-feedback">
+                      <div *ngIf="f.txtPinCode.errors.required">PIN Code is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Addon Service <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <textarea rows="5" class="form-control" id="addonService" formControlName="addonService"></textarea>
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Country <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <select class="form-control" aria-label="Default select example" formControlName="GuCountry" ng-required="true" >
+                      <option *ngFor="let country of countries"  [selected]="country.countryId" [value]="country.countryId">{{country.countryName}}</option>
+                    </select>
+                   
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-3">State Name <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <select class="form-control" aria-label="Default select example" id="ddlState" formControlName="ddlState" (change)="onStateChange($event.target.value)" >
+                      <option *ngFor="let state of states" [selected]="state.stateId" [value]="state.stateId">{{state.stateName}}</option>
+                    </select>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+
+                <div class="form-group row">
+                  <div class="col-sm-3">District Name <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <select class="form-control" aria-label="Default select example" (change)="onDistrictChange($event.target.value)" id="ddlDistrict" formControlName="ddlDistrict" [ngClass]="{ 'is-invalid': submitted && f.ddlDistrict.errors }">
+                      <option *ngFor="let district of districts" [selected]="district.districtId" [value]="district.districtId">{{district.districtName}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.ddlDistrict.errors" class="invalid-feedback">
+                      <div *ngIf="f.ddlDistrict.errors.required">District Name is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Block Name <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <select class="form-control" aria-label="Default select example" (change)="onBlockChange($event.target.value)" id="ddlBlock" formControlName="ddlBlock" [ngClass]="{ 'is-invalid': submitted && f.ddlBlock.errors }">
+                      <option value="">--Select--</option>
+                      <option *ngFor="let block of blocks" [value]="block.blockId">{{block.blockName}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.ddlBlock.errors" class="invalid-feedback">
+                      <div *ngIf="f.ddlBlock.errors.required">Block Name is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Village Category <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="ddlVillageCat" formControlName="ddlVillageCat" [ngClass]="{ 'is-invalid': submitted && f.ddlVillageCat.errors }">
+                      <option *ngFor="let village of villagesCat" [selected]="village.villageCategoryId" [value]="village.villageCategoryId">{{village.villageCategoryName}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.ddlVillageCat.errors" class="invalid-feedback">
+                      <div *ngIf="f.ddlVillageCat.errors.required">Village Category is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Village Name <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="ddlVillageName" formControlName="ddlVillageName" [ngClass]="{ 'is-invalid': submitted && f.ddlVillageName.errors }">
+                      <option value="">--Select--</option>
+                      <option *ngFor="let village of villages" [value]="village.villId">{{village.villName}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.ddlVillageName.errors" class="invalid-feedback">
+                      <div *ngIf="f.ddlVillageName.errors.required">Village Name is required</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-3">Contact Person Name <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="txtContactPerson" formControlName="txtContactPerson" [ngClass]="{ 'is-invalid': submitted && f.txtContactPerson.errors }">
+                    <div *ngIf="submitted && f.txtContactPerson.errors" class="invalid-feedback">
+                      <div *ngIf="f.txtContactPerson.errors.required">Contact Person Name is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Contact No 1 <span style="color:red">*</span></div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="txtContactNo1" formControlName="txtContactNo1" [ngClass]="{ 'is-invalid': submitted && f.txtContactNo1.errors }">
+                    <div *ngIf="submitted && f.txtContactNo1.errors" class="invalid-feedback">
+                      <div *ngIf="f.txtContactNo1.errors.required">Contact No is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Contact No 2 </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="txtContactNo2" formControlName="txtContactNo2">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Contact Email<span style="color:red">*</span> </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="txtEmailId" formControlName="txtEmailId" [ngClass]="{ 'is-invalid': submitted && f.txtEmailId.errors }">
+                    <div *ngIf="submitted && f.txtEmailId.errors" class="invalid-feedback">
+                      <div *ngIf="f.txtEmailId.errors.required">Contact Email is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Bank Name <span style="color:red">*</span> </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="HsBankName" formControlName="HsBankName" [value]="myDefaultValue" readonly="readonly">
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Branch Name <span style="color:red">*</span> </div>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="HsBankBranch" formControlName="HsBankBranch" [ngClass]="{ 'is-invalid': submitted && f.HsBankBranch.errors }">
+                      <option value="">--Select--</option>
+                      <option value="NA">NONE</option>
+                      <option value="HO">HEAD OFFICE</option>
+                      <option value="KALIMPONG">KALIMPONG</option>
+                      <option value="PEDONG">PEDONG</option>
+                      <option value="GORUBATHAN">GORUBATHAN</option>
+                      <option value="DARJEELING">DARJEELING</option>
+                      <option value="KURSEONG">KURSEONG</option>
+                      <option value="SUKHIAPOKHARI">SUKHIAPOKHARI</option>
+                      <option value="BIJANBARI">BIJANBARI</option>
+                      <option value="RIMBICK">RIMBICK</option>
+                      <option value="MIRIK">MIRIK</option>
+                      <option value="JHOLONG">JHOLONG</option>
+                      <option value="SALBARI">SALBARI</option>
+                    </select>
+                    <div *ngIf="submitted && f.HsBankBranch.errors" class="invalid-feedback">
+                      <div *ngIf="f.txtEmailId.HsBankBranch.required">Bank Branch is required</div>
+                    </div>
+                    <!--<input type="text" class="form-control" id="HsBankBranch" formControlName="HsBankBranch" [ngClass]="{ 'is-invalid': submitted && f.HsBankBranch.errors }">
+      <div *ngIf="submitted && f.HsBankBranch.errors" class="invalid-feedback">
+        <div *ngIf="f.txtEmailId.HsBankBranch.required">Bank Branch is required</div>
+      </div>-->
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Account No <span style="color:red">*</span> </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="HsAccountNo" formControlName="HsAccountNo" [ngClass]="{ 'is-invalid': submitted && f.HsAccountNo.errors }">
+                    <div *ngIf="submitted && f.HsAccountNo.errors" class="invalid-feedback">
+                      <div *ngIf="f.txtEmailId.HsAccountNo.required">Account No is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">Account Type <span style="color:red">*</span> </div>
+                  <div class="col-sm-9">
+
+                    <select class="form-control" id="HsAccountType" formControlName="HsAccountType" [ngClass]="{ 'is-invalid': submitted && f.HsAccountType.errors }">
+                      <option value="">--Select--</option>
+                      <option value="CURRENT">CURRENT ACCOUNT</option>
+                      <option value="SAVING">SAVING ACCOUNT</option>
+                    </select>
+                    <div *ngIf="submitted && f.HsAccountType.errors" class="invalid-feedback">
+                      <div *ngIf="f.HsAccountType.errors.required">Account Type is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">IFSC Code <span style="color:red">*</span> </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="HsIfsc" formControlName="HsIfsc" [ngClass]="{ 'is-invalid': submitted && f.HsIfsc.errors }">
+                    <div *ngIf="submitted && f.HsIfsc.errors" class="invalid-feedback">
+                      <div *ngIf="f.HsIfsc.errors.required">IFSC Code is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">MICR Code <span style="color:red">*</span> </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="HsMicr" formControlName="HsMicr" [ngClass]="{ 'is-invalid': submitted && f.HsMicr.errors }">
+                    <div *ngIf="submitted && f.HsMicr.errors" class="invalid-feedback">
+                      <div *ngIf="f.HsMicr.errors.required">MICR Code is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">User Name <span style="color:red">*</span> </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="userName" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+                    <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                      <div *ngIf="f.userName.errors.required">User Name is required</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+          <div class="footer-jo">
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group row">
+                  <div class="col-sm-4">
+                    <h2>If Registered, <a href="#" routerLink="/hs-login">Login here</a></h2>
+                  </div>
+                  <div class="col-sm-8"><button type="button" class="btn btn-primary" (click)="onSubmit()">Save and Next</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- Footer End -->

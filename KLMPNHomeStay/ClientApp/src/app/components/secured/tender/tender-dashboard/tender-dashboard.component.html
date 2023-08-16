@@ -1,0 +1,136 @@
+<!--<p>tender-dashboard works!</p>-->
+<!-- header -->
+<!--<app-header></app-header>-->
+<!-- header End -->
+<app-login-header></app-login-header>
+<br />
+<div id="booking" class="booking-section">
+  <div class="container" style="height:50px">
+    &nbsp;
+  </div>
+</div>
+<main>
+  <div>
+    <section class="features">
+      <div class="container">
+        <!--<h2 class="section-header-two text-center">
+        <a href="javascript:void(0);" (click)="back()">
+          <i class="fa fa fa-backspace"
+             aria-hidden="true"></i>
+        </a>
+        Notice Dashboard
+        <a href="javascript:void(0);" (click)="onNoticeAdd()">
+          <i class="fa fa fa-plus-circle"
+             aria-hidden="true"></i>
+        </a>-->
+        <!-- <button type="button" class="btn btn-danger" (click)="back()">Back</button>-->
+        <!--</h2>-->
+        <h2 class="section-header-two text-center">
+          <a href="javascript:void(0);" (click)="back()">
+            <i class="fa fa fa-backspace"
+               aria-hidden="true"></i>
+          </a>
+          Tender Dashboard
+          <a href="javascript:void(0);" (click)="onTenderAdd()">
+            <i class="fa fa fa-plus-circle"
+               aria-hidden="true"></i>
+          </a>
+        </h2>
+        <div class="modal-content" style="padding:0px; border:none;">
+          <div class="modal-body">
+            <table class="table" width="100%">
+              <thead>
+                <tr>
+                  <!--<th width="20px">#</th>
+                  <th width="150px">Sl No.</th>-->
+                  <th width="30%" scope="col"><h5><strong>Subject</strong></h5></th>
+                  <th width="10%" scope="col"><h5><strong>Financial Year</strong></h5></th>
+                  <th width="10%" scope="col"><h5><strong>Memo</strong></h5></th>
+                  <th width="10%" scope="col"><h5><strong>Publishing Date</strong></h5></th>
+                  <th width="10%" scope="col"><h5><strong>Closing Date</strong></h5></th>
+                  <th width="15%" scope="col"><h5><strong>File</strong></h5></th>
+                  <th width="15%" scope="col"><h5><strong>Action</strong></h5></th>
+
+                  <th width="100px">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody style="max-height:450px">
+                <tr *ngFor="let el of tenderList | paginate: { itemsPerPage: 5, currentPage: p }">
+
+                  <td width="140px">{{el.subject}}</td>
+                  <td width="150px">{{el.finYr}}</td>
+                  <td width="150px">{{el.memoNo}}</td>
+                  <td width="140px">{{el.publishingDate| date: 'dd-MM-yyyy'}}</td>
+                  <td width="140px">{{el.closingDate| date: 'dd-MM-yyyy'}}</td>
+                  <td width="70px" class="actioncol">
+                    <a href="javascript:void(0);" class="viwq"><i class="fas fa-file-pdf fa-2x red" aria-hidden="true" (click)="viewFile(el.tenderId)"></i></a>
+                  </td>
+                  <td width="100px"><a href="javascript:void(0);" class="viwq"><i class="fa fa fa-pencil-alt" aria-hidden="true" (click)="onClickEdit(el.tenderId)"></i></a></td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!--<section class="features">
+    <div class="container">
+                    <!--<h2 class="section-header-two text-center">Notice Dashboard</h2>
+    <button type="button" (click)="onNoticeAdd()">Notice Add</button>-->
+    <!--<div class="col-lg-5 col-sm-12">
+        <h2 class="subTitle">
+          Tender Dashboard <a href="javascript:void(0);" (click)="onTenderAdd()">
+            <i class="fa fa fa-plus-circle"
+               aria-hidden="true"></i>
+          </a>
+        </h2>
+      </div>
+    </div>-->
+    <!--<button type="button" (click)="GetAllNotice()">Notice Add</button>-->
+    <!--<div class="table-responsive mx-ht">
+    <table class="table table-fixed mg-btm">
+      <thead>
+        <tr>-->
+    <!-- <th width="20px">#</th> -->
+    <!--<th width="150px">Sl No.</th>-->
+    <!--<th width="140px">Subject</th>
+        <th width="150px">Financial Year</th>
+        <th width="140px">Memo</th>
+        <th width="140px">Publishing Date</th>
+        <th width="140px">Closing Date</th>
+        <th width="70px" class="actioncol">File</th>
+        <th width="70px" class="actioncol">Action</th>
+
+        <th width="100px">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody style="max-height:450px">
+      <tr *ngFor="let el of tenderList; let i=index;">-->
+    <!--<td width="150px">{{(pageNo * pageSize)+i+1}}</td>-->
+    <!--<td width="140px">{{ index + 1 }}</td>-->
+    <!--<td width="140px">{{el.subject}}</td>
+              <td width="150px">{{el.finYr}}</td>
+              <td width="150px">{{el.memoNo}}</td>
+              <td width="140px">{{el.publishingDate| date: 'dd-MM-yyyy'}}</td>
+              <td width="140px">{{el.closingDate| date: 'dd-MM-yyyy'}}</td>
+              <td width="70px" class="actioncol">
+                <a href="javascript:void(0);" class="viwq"><i class="fa fa fa-file" aria-hidden="true" (click)="viewFile(el.tenderId)"></i></a>
+              </td>
+              <td width="100px"><a href="javascript:void(0);" class="viwq"><i class="fa fa fa-pencil-alt" aria-hidden="true" (click)="onClickEdit(el.tenderId)"></i></a></td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </section>
+    <button type="button" class="btn btn-danger" (click)="back()">Back</button>-->
+  </div>
+</main>
+<app-footer></app-footer>
+
+<!-- Footer -->
+<!--<app-footer></app-footer>-->
+<!-- Footer End -->
